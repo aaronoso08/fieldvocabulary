@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Field Vocab — Energy Trust of Oregon</title>
+<title>Field Vocab</title>
 <style>
   :root {
     --orange: #f97316;
@@ -221,6 +221,8 @@
       <option value="Lighting">Lighting</option>
       <option value="Utility">Utility</option>
       <option value="Construction">Construction</option>
+      <option value="Office">Office</option>
+      <option value="Scheduling">Scheduling</option>
       <option value="Mixed">Mixed</option>
     </select>
     <button class="ws-new-btn" onclick="generatePuzzle()">New Puzzle</button>
@@ -288,6 +290,55 @@ const vocab = [
   { en:"Safety glasses", es:"Lentes de seguridad", pron:"LEN-tes deh seh-goo-ree-DAHD", cat:"Construction", note:"Required PPE on active job sites." },
   { en:"Hard hat", es:"Casco de seguridad", pron:"KAS-koh deh seh-goo-ree-DAHD", cat:"Construction", note:"Required on active construction sites." },
   { en:"Gloves", es:"Guantes", pron:"GWAHN-tes", cat:"Construction", note:"Required when handling insulation or spray foam materials." },
+  // Office
+  { en:"Appointment", es:"Cita", pron:"SEE-tah", cat:"Office", note:"Use when scheduling: ¿Podemos hacer una cita? (Can we make an appointment?)" },
+  { en:"Application", es:"Solicitud", pron:"soh-lee-see-TOOD", cat:"Office", note:"Program enrollment form. ¿Tiene su solicitud lista? (Do you have your application ready?)" },
+  { en:"Document", es:"Documento", pron:"doh-koo-MEN-toh", cat:"Office", note:"Needed for eligibility verification. Necesitamos sus documentos. (We need your documents.)" },
+  { en:"Signature", es:"Firma", pron:"FEER-mah", cat:"Office", note:"Necesito su firma aquí. (I need your signature here.)" },
+  { en:"Form", es:"Formulario", pron:"for-moo-LAH-ree-oh", cat:"Office", note:"Por favor llene este formulario. (Please fill out this form.)" },
+  { en:"Proof of income", es:"Comprobante de ingresos", pron:"kom-proh-BAHN-teh deh een-GREH-sohs", cat:"Office", note:"Required for CPF program income qualification." },
+  { en:"Identification", es:"Identificación", pron:"ee-den-tee-fee-kah-see-OHN", cat:"Office", note:"¿Tiene una identificación? (Do you have an ID?)" },
+  { en:"Landlord", es:"Propietario / Dueño", pron:"proh-pee-eh-TAH-ree-oh / DWEH-nyoh", cat:"Office", note:"Key to know for rental properties — owner approval may be needed." },
+  { en:"Tenant", es:"Inquilino", pron:"een-kee-LEE-noh", cat:"Office", note:"Person renting the home. Programs may be available regardless of ownership." },
+  { en:"Renter", es:"Arrendatario", pron:"ah-ren-dah-TAH-ree-oh", cat:"Office", note:"Similar to inquilino. Clarify ownership status for program eligibility." },
+  { en:"Homeowner", es:"Propietario de la casa", pron:"proh-pee-eh-TAH-ree-oh", cat:"Office", note:"Confirm ownership — some upgrades require owner consent." },
+  { en:"Income", es:"Ingresos", pron:"een-GREH-sohs", cat:"Office", note:"Key eligibility factor. ¿Cuáles son sus ingresos mensuales? (What is your monthly income?)" },
+  { en:"Household", es:"Hogar", pron:"oh-GAR", cat:"Office", note:"Refers to everyone living in the home. ¿Cuántas personas viven en el hogar? (How many people live in the household?)" },
+  { en:"Phone number", es:"Número de teléfono", pron:"NOO-meh-roh deh teh-LEH-foh-noh", cat:"Office", note:"¿Cuál es su número de teléfono? (What is your phone number?)" },
+  { en:"Email", es:"Correo electrónico", pron:"koh-REH-oh eh-lek-TROH-nee-koh", cat:"Office", note:"Often just called 'email' — widely understood in both languages." },
+  { en:"Address", es:"Dirección", pron:"dee-rek-see-OHN", cat:"Office", note:"¿Cuál es su dirección? (What is your address?)" },
+  { en:"Zip code", es:"Código postal", pron:"KOH-dee-goh pos-TAHL", cat:"Office", note:"Used to verify service area eligibility." },
+  { en:"Approval", es:"Aprobación", pron:"ah-proh-bah-see-OHN", cat:"Office", note:"Su solicitud fue aprobada. (Your application was approved.)" },
+  { en:"Denial", es:"Rechazo / Denegación", pron:"reh-CHAH-soh", cat:"Office", note:"Su solicitud fue rechazada. (Your application was denied.) Always explain why." },
+  { en:"Follow up", es:"Seguimiento", pron:"seh-gee-mee-EN-toh", cat:"Office", note:"Haremos un seguimiento con usted. (We will follow up with you.)" },
+  { en:"Coordinator", es:"Coordinador", pron:"koh-or-dee-nah-DOR", cat:"Office", note:"The person managing the program and scheduling at the partner org." },
+  { en:"Partner organization", es:"Organización asociada", pron:"or-gah-nee-sah-see-OHN ah-soh-see-AH-dah", cat:"Office", note:"Community organization connected to CPF program." },
+  { en:"Referral", es:"Referido", pron:"reh-feh-REE-doh", cat:"Office", note:"¿Quién lo refirió a nuestro programa? (Who referred you to our program?)" },
+  // Scheduling
+  { en:"Schedule", es:"Horario / Programar", pron:"oh-RAH-ree-oh / proh-grah-MAR", cat:"Scheduling", note:"Horario = a schedule (noun). Programar = to schedule (verb). ¿Podemos programar una visita? (Can we schedule a visit?)" },
+  { en:"Confirm", es:"Confirmar", pron:"kon-feer-MAR", cat:"Scheduling", note:"Por favor confirme su cita. (Please confirm your appointment.)" },
+  { en:"Cancel", es:"Cancelar", pron:"kan-seh-LAR", cat:"Scheduling", note:"¿Necesita cancelar su cita? (Do you need to cancel your appointment?)" },
+  { en:"Reschedule", es:"Reprogramar", pron:"reh-proh-grah-MAR", cat:"Scheduling", note:"¿Podemos reprogramar para otra fecha? (Can we reschedule for another date?)" },
+  { en:"Date", es:"Fecha", pron:"FEH-chah", cat:"Scheduling", note:"¿Qué fecha le conviene? (What date works for you?)" },
+  { en:"Time", es:"Hora", pron:"OH-rah", cat:"Scheduling", note:"¿A qué hora le conviene? (What time works for you?)" },
+  { en:"Morning", es:"Mañana", pron:"mah-NYAH-nah", cat:"Scheduling", note:"¿Prefiere en la mañana o en la tarde? (Do you prefer morning or afternoon?)" },
+  { en:"Afternoon", es:"Tarde", pron:"TAR-deh", cat:"Scheduling", note:"Common preference for working families — good to ask." },
+  { en:"Availability", es:"Disponibilidad", pron:"dees-poh-nee-bee-lee-DAHD", cat:"Scheduling", note:"¿Cuál es su disponibilidad esta semana? (What is your availability this week?)" },
+  { en:"Week", es:"Semana", pron:"seh-MAH-nah", cat:"Scheduling", note:"Esta semana / la próxima semana (This week / next week)" },
+  { en:"Monday", es:"Lunes", pron:"LOO-nes", cat:"Scheduling", note:"" },
+  { en:"Tuesday", es:"Martes", pron:"MAR-tes", cat:"Scheduling", note:"" },
+  { en:"Wednesday", es:"Miércoles", pron:"mee-EHR-koh-les", cat:"Scheduling", note:"" },
+  { en:"Thursday", es:"Jueves", pron:"HWEH-ves", cat:"Scheduling", note:"" },
+  { en:"Friday", es:"Viernes", pron:"vee-EHR-nes", cat:"Scheduling", note:"" },
+  { en:"Reminder", es:"Recordatorio", pron:"reh-kor-dah-TOH-ree-oh", cat:"Scheduling", note:"Le enviamos un recordatorio. (We'll send you a reminder.)" },
+  { en:"No-show", es:"No se presentó", pron:"noh seh preh-sen-TOH", cat:"Scheduling", note:"El cliente no se presentó. (The client did not show up.)" },
+  { en:"Home visit", es:"Visita al hogar", pron:"vee-SEE-tah ahl oh-GAR", cat:"Scheduling", note:"Core activity for assessors. Programaremos una visita al hogar. (We'll schedule a home visit.)" },
+  { en:"Waiting list", es:"Lista de espera", pron:"LEES-tah deh es-PEH-rah", cat:"Scheduling", note:"Le pondremos en la lista de espera. (We'll put you on the waiting list.)" },
+  { en:"Status", es:"Estado", pron:"es-TAH-doh", cat:"Scheduling", note:"¿Cuál es el estado de mi solicitud? (What is the status of my application?)" },
+  { en:"Complete", es:"Completado", pron:"kom-pleh-TAH-doh", cat:"Scheduling", note:"Su visita está completada. (Your visit is complete.)" },
+  { en:"Pending", es:"Pendiente", pron:"pen-dee-EN-teh", cat:"Scheduling", note:"Su solicitud está pendiente. (Your application is pending.)" },
+  { en:"Approved", es:"Aprobado", pron:"ah-proh-BAH-doh", cat:"Scheduling", note:"Su caso fue aprobado. (Your case was approved.)" },
+  { en:"Next steps", es:"Próximos pasos", pron:"PROHK-see-mohs PAH-sohs", cat:"Scheduling", note:"Estos son los próximos pasos. (These are the next steps.) Use at end of visits." },
 ];
 
 const phrases = [
@@ -334,6 +385,42 @@ const phrases = [
     translations: {
       en: "This program can help you reduce your bill and save energy at no cost.",
       es: "Este programa puede ayudarle a reducir su factura y ahorrar energía sin costo."
+    }
+  },
+  {
+    scenario: "Scheduling",
+    en: ["I would like", "to schedule", "a home visit", "what date", "works for you"],
+    es: ["Me gustaría", "programar", "una visita al hogar", "¿qué fecha", "le conviene?"],
+    translations: {
+      en: "I would like to schedule a home visit — what date works for you?",
+      es: "Me gustaría programar una visita al hogar — ¿qué fecha le conviene?"
+    }
+  },
+  {
+    scenario: "Confirm Appointment",
+    en: ["I am calling", "to confirm", "your appointment", "on", "at"],
+    es: ["Le llamo", "para confirmar", "su cita", "el", "a las"],
+    translations: {
+      en: "I am calling to confirm your appointment on [date] at [time].",
+      es: "Le llamo para confirmar su cita el [fecha] a las [hora]."
+    }
+  },
+  {
+    scenario: "Documents Needed",
+    en: ["We need", "proof of income", "identification", "and your", "utility bill"],
+    es: ["Necesitamos", "comprobante de ingresos", "identificación", "y su", "factura de luz"],
+    translations: {
+      en: "We need proof of income, identification, and your utility bill.",
+      es: "Necesitamos comprobante de ingresos, identificación, y su factura de luz."
+    }
+  },
+  {
+    scenario: "Application Status",
+    en: ["Your application", "is", "approved", "pending", "we will follow up"],
+    es: ["Su solicitud", "está", "aprobada", "pendiente", "haremos seguimiento"],
+    translations: {
+      en: "Your application is approved / pending — we will follow up with you.",
+      es: "Su solicitud está aprobada / pendiente — haremos seguimiento con usted."
     }
   }
 ];
