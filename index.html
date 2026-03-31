@@ -224,6 +224,12 @@
       <option value="Construction">Construction</option>
       <option value="Office">Office</option>
       <option value="Scheduling">Scheduling</option>
+      <option value="Insulation">Insulation</option>
+      <option value="Equipment">Equipment</option>
+      <option value="Program">Program</option>
+      <option value="Health &amp; Safety">Health &amp; Safety</option>
+      <option value="Windows &amp; Envelope">Windows &amp; Envelope</option>
+      <option value="Foundation">Foundation</option>
       <option value="Mixed">Mixed</option>
     </select>
     <button class="ws-new-btn" onclick="generatePuzzle()">New Puzzle</button>
@@ -340,6 +346,110 @@ const vocab = [
   { en:"Pending", es:"Pendiente", pron:"pen-dee-EN-teh", cat:"Scheduling", note:"Su solicitud está pendiente. (Your application is pending.)" },
   { en:"Approved", es:"Aprobado", pron:"ah-proh-BAH-doh", cat:"Scheduling", note:"Su caso fue aprobado. (Your case was approved.)" },
   { en:"Next steps", es:"Próximos pasos", pron:"PROHK-see-mohs PAH-sohs", cat:"Scheduling", note:"Estos son los próximos pasos. (These are the next steps.) Use at end of visits." },
+
+  // Insulation
+  { en:"R-value", es:"Valor R", pron:"vah-LOR EH-reh", cat:"Insulation", note:"Measures thermal resistance of insulation. Higher = more effective. Energy Trust requires R-38 minimum for attics." },
+  { en:"Blown-in insulation", es:"Aislamiento soplado", pron:"ahy-slah-mee-EN-toh soh-PLAH-doh", cat:"Insulation", note:"Loose fill insulation installed with a blower. Common in attics. Look for fiberglass (pink/white/yellow) or cellulose (gray)." },
+  { en:"Batt insulation", es:"Aislamiento en rollo", pron:"ahy-slah-mee-EN-toh en ROH-yoh", cat:"Insulation", note:"Pre-cut fiberglass or mineral wool panels installed between joists or studs." },
+  { en:"Cellulose", es:"Celulosa", pron:"seh-loo-LOH-sah", cat:"Insulation", note:"Gray recycled paper insulation. About R-3.2 per inch. Common blown-in type." },
+  { en:"Fiberglass", es:"Fibra de vidrio", pron:"FEE-brah deh VEE-dree-oh", cat:"Insulation", note:"Pink/white/yellow insulation. Most common type. Loose fill is R-2.3/inch; batts are R-3.1/inch." },
+  { en:"Vermiculite", es:"Vermiculita", pron:"ver-mee-koo-LEE-tah", cat:"Insulation", note:"Silver/brown mica-like insulation — may contain asbestos. Do NOT disturb. Flag as health concern immediately." },
+  { en:"Rockwool", es:"Lana de roca", pron:"LAH-nah deh ROH-kah", cat:"Insulation", note:"Black/gray mineral wool insulation. About R-3.1 per inch. Fire resistant." },
+  { en:"Attic insulation", es:"Aislamiento del ático", pron:"ahy-slah-mee-EN-toh del AH-tee-koh", cat:"Insulation", note:"Recommend upgrade if existing insulation is R-18 or less (about 5 inches deep)." },
+  { en:"Floor insulation", es:"Aislamiento del piso", pron:"ahy-slah-mee-EN-toh del PEE-soh", cat:"Insulation", note:"Recommend if no functional floor insulation present. Target R-30 or filled cavity." },
+  { en:"Flat attic", es:"Ático plano", pron:"AH-tee-koh PLAH-noh", cat:"Insulation", note:"Horizontal ceiling — most common. Insulation sits on top of ceiling drywall between joists." },
+  { en:"Vaulted ceiling", es:"Techo abovedado", pron:"TEH-choh ah-boh-veh-DAH-doh", cat:"Insulation", note:"Sloped ceiling — harder to insulate. Note during assessment as it limits upgrade options." },
+  { en:"Depth", es:"Profundidad", pron:"proh-foon-dee-DAHD", cat:"Insulation", note:"Measure insulation depth in inches to estimate R-value. ¿Cuántas pulgadas tiene? (How many inches deep is it?)" },
+  { en:"Air sealing", es:"Sellado de aire", pron:"seh-YAH-doh deh EYE-reh", cat:"Insulation", note:"Closing gaps where conditioned air escapes. Often done before adding insulation." },
+  { en:"Thermal envelope", es:"Envolvente térmica", pron:"en-vol-VEN-teh TEHR-mee-kah", cat:"Insulation", note:"The boundary between conditioned and unconditioned space — walls, roof, floor." },
+
+  // Health & Safety
+  { en:"Knob and tube wiring", es:"Cableado de perilla y tubo", pron:"kah-bleh-AH-doh deh peh-REE-yah", cat:"Health & Safety", note:"Old electrical wiring — cannot be covered with insulation. Flag immediately for electrician review." },
+  { en:"Mold", es:"Moho", pron:"MOH-oh", cat:"Health & Safety", note:"Look for dark spots on walls, ceilings, and in attics/crawl spaces. Flag as health concern. ¿Ve algún moho? (Do you see any mold?)" },
+  { en:"Carbon monoxide detector", es:"Detector de monóxido de carbono", pron:"deh-tek-TOR deh moh-NOHK-see-doh", cat:"Health & Safety", note:"Required on each floor if home has combustible appliances (gas, propane, wood). Check if functioning." },
+  { en:"Smoke detector", es:"Detector de humo", pron:"deh-tek-TOR deh OO-moh", cat:"Health & Safety", note:"Should be one functioning unit per floor. Ask: ¿Funcionan los detectores de humo? (Are smoke detectors working?)" },
+  { en:"Standing water", es:"Agua estancada", pron:"AH-gwah es-tan-KAH-dah", cat:"Health & Safety", note:"Found in crawl spaces. Major moisture and structural concern — do not enter if water is present." },
+  { en:"Rodent activity", es:"Actividad de roedores", pron:"ak-tee-vee-DAHD deh roh-eh-DOH-rehs", cat:"Health & Safety", note:"Check for droppings or nests before entering attic or crawl space. Do not enter if signs are present." },
+  { en:"Asbestos", es:"Asbesto", pron:"ahs-BES-toh", cat:"Health & Safety", note:"Possible in older homes, especially pre-1980. Do not disturb. Flag for professional testing." },
+  { en:"Personal protective equipment", es:"Equipo de protección personal", pron:"eh-KEE-poh deh proh-tek-see-OHN", cat:"Health & Safety", note:"Required in attics and crawl spaces: gloves, dust mask, headlamp, bump cap." },
+  { en:"Dust mask", es:"Mascarilla contra polvo", pron:"mas-kah-REE-yah KON-trah POL-voh", cat:"Health & Safety", note:"Wear when entering attics or crawl spaces with insulation or dust." },
+  { en:"Exhaust fan", es:"Ventilador de extracción", pron:"ven-tee-lah-DOR deh ex-trak-see-OHN", cat:"Health & Safety", note:"Check that bath and kitchen fans are functional and vented correctly to exterior. Try the toilet paper test." },
+  { en:"Combustion appliance", es:"Aparato de combustión", pron:"ah-pah-RAH-toh deh kom-boos-tee-OHN", cat:"Health & Safety", note:"Gas furnaces, water heaters, stoves — produce CO. Requires working CO detector on same floor." },
+  { en:"Hot wire", es:"Cable con corriente", pron:"KAH-bleh kon koh-ree-EN-teh", cat:"Health & Safety", note:"Always assume electrical wires are live. Do not touch. Avise al electricista. (Notify an electrician.)" },
+  { en:"Bump cap", es:"Casco ligero", pron:"KAS-koh lee-HEH-roh", cat:"Health & Safety", note:"Soft helmet to protect from exposed nails in attics. Not a hard hat substitute." },
+  { en:"Headlamp", es:"Linterna de cabeza", pron:"leen-TEHR-nah deh kah-BEH-sah", cat:"Health & Safety", note:"Essential for attic and crawl space inspection. Keep hands free." },
+  { en:"Ground cover", es:"Cubierta de suelo", pron:"koo-bee-EHR-tah deh SWEH-loh", cat:"Health & Safety", note:"Plastic sheeting on crawl space floor. Note if present and condition." },
+
+  // Equipment
+  { en:"Heat pump", es:"Bomba de calor", pron:"BOM-bah deh kah-LOR", cat:"Equipment", note:"Efficient electric heating and cooling system. Uses electricity to move heat instead of generate it. Key upgrade recommendation." },
+  { en:"Ductless heat pump", es:"Bomba de calor sin ductos", pron:"BOM-bah deh kah-LOR seen DOOK-tohs", cat:"Equipment", note:"Also called a mini-split. Recommended for homes with electric resistance zonal heat (baseboards, wall heaters)." },
+  { en:"Ducted heat pump", es:"Bomba de calor con ductos", pron:"BOM-bah deh kah-LOR kon DOOK-tohs", cat:"Equipment", note:"Replaces electric resistance forced-air furnace. Uses existing ductwork." },
+  { en:"Heat pump water heater", es:"Calentador de agua tipo bomba de calor", pron:"kah-len-tah-DOR deh AH-gwah", cat:"Equipment", note:"Recommended for older electric resistance water heaters (10-15+ years). Install in unconditioned space — it cools the surrounding area." },
+  { en:"Gas furnace", es:"Calefactor de gas", pron:"kah-leh-fak-TOR deh gahs", cat:"Equipment", note:"Recommend 90+% AFUE replacement for old non-condensing units. Look for single flue pipe = non-condensing." },
+  { en:"Condensing furnace", es:"Calefactor condensante", pron:"kah-leh-fak-TOR kon-den-SAHN-teh", cat:"Equipment", note:"High-efficiency gas furnace. Has PVC exhaust pipes (two pipes), not metal flue. AFUE 90%+." },
+  { en:"AFUE", es:"AFUE", pron:"AH-fyoo-eh", cat:"Equipment", note:"Annual Fuel Utilization Efficiency. Measures how efficiently a furnace converts gas to heat. 90%+ is Energy Trust preferred." },
+  { en:"AHRI", es:"AHRI", pron:"AH-ree", cat:"Equipment", note:"Air-Conditioning, Heating and Refrigeration Institute. Look up model numbers here to find efficiency ratings." },
+  { en:"Electric resistance heat", es:"Calefacción eléctrica de resistencia", pron:"kah-leh-fak-see-OHN eh-LEK-tree-kah", cat:"Equipment", note:"Baseboard heaters, wall heaters (Cadet/Zonal). Least efficient electric heat. Prime candidate for heat pump upgrade." },
+  { en:"Forced air", es:"Aire forzado", pron:"EYE-reh for-SAH-doh", cat:"Equipment", note:"Heating/cooling distributed through ducts. Furnace or air handler pushes air through system." },
+  { en:"Zonal heat", es:"Calefacción zonal", pron:"kah-leh-fak-see-OHN soh-NAHL", cat:"Equipment", note:"Each room has its own heater (baseboard, wall unit). No ductwork. Common in older homes." },
+  { en:"Boiler", es:"Caldera", pron:"kahl-DEH-rah", cat:"Equipment", note:"Heats water and distributes through radiators or radiant floor. Note fuel type and age." },
+  { en:"Smart thermostat", es:"Termostato inteligente", pron:"tehr-moh-STAH-toh een-teh-lee-HEN-teh", cat:"Equipment", note:"WiFi-enabled thermostat (Nest, EcoBee). Recommend if home has forced-air system, non-programmable thermostat, and WiFi." },
+  { en:"Programmable thermostat", es:"Termostato programable", pron:"tehr-moh-STAH-toh proh-grah-MAH-bleh", cat:"Equipment", note:"Digital thermostat with scheduling. Better than analog but not as efficient as smart thermostat." },
+  { en:"Non-programmable thermostat", es:"Termostato no programable", pron:"tehr-moh-STAH-toh noh proh-grah-MAH-bleh", cat:"Equipment", note:"Old analog dial thermostat. Flag as upgrade opportunity if home has forced-air and WiFi." },
+  { en:"Central air conditioning", es:"Aire acondicionado central", pron:"EYE-reh ah-kon-dee-see-oh-NAH-doh", cat:"Equipment", note:"Ducted cooling system connected to forced-air furnace. Note if present — often paired with existing ductwork." },
+  { en:"Window air conditioner", es:"Aire acondicionado de ventana", pron:"EYE-reh de ven-TAH-nah", cat:"Equipment", note:"Portable window unit for cooling individual rooms. Note count and rooms covered." },
+  { en:"Manufacturer label", es:"Etiqueta del fabricante", pron:"eh-tee-KEH-tah del fah-bree-KAN-teh", cat:"Equipment", note:"Found on equipment — note model number, serial number, and efficiency rating. Look up on AHRI." },
+  { en:"Model number", es:"Número de modelo", pron:"NOO-meh-roh deh moh-DEH-loh", cat:"Equipment", note:"On equipment label. Used to look up efficiency data on AHRI website." },
+  { en:"Serial number", es:"Número de serie", pron:"NOO-meh-roh deh SEH-ree-eh", cat:"Equipment", note:"On equipment label — helps estimate age if manufacture date isn't listed." },
+  { en:"Gas line", es:"Línea de gas", pron:"LEE-neh-ah deh gahs", cat:"Equipment", note:"Flexible or rigid pipe connecting gas appliances. Indicates gas-fueled equipment vs. electric." },
+  { en:"Flue pipe", es:"Tubo de escape", pron:"TOO-boh deh es-KAH-peh", cat:"Equipment", note:"Metal exhaust pipe on non-condensing furnaces/water heaters. Single metal pipe = non-condensing (less efficient)." },
+  { en:"Secondary heating", es:"Calefacción secundaria", pron:"kah-leh-fak-see-OHN seh-koon-DAH-ree-ah", cat:"Equipment", note:"Non-electric supplemental heat in living space (wood stove, propane, kerosene). May affect ductless heat pump incentive eligibility." },
+  { en:"Wood stove", es:"Estufa de leña", pron:"es-TOO-fah deh LEH-nyah", cat:"Equipment", note:"Common secondary heat source. Note if it's in the primary living space — affects DHP incentive eligibility." },
+  { en:"Propane heater", es:"Calentador de propano", pron:"kah-len-tah-DOR deh proh-PAH-noh", cat:"Equipment", note:"Portable or fixed propane unit. Note as secondary heat source on assessment form." },
+
+  // Program
+  { en:"Community Partner Funding", es:"Financiamiento de Socio Comunitario", pron:"fee-nan-see-ah-mee-EN-toh", cat:"Program", note:"CPF program connects underserved communities with energy efficiency resources through local partner organizations." },
+  { en:"Home energy assessment", es:"Evaluación de energía del hogar", pron:"eh-vah-loo-ah-see-OHN deh eh-nehr-HEE-ah", cat:"Program", note:"In-home visit to evaluate energy systems and recommend cost-effective upgrades." },
+  { en:"Incentive", es:"Incentivo", pron:"een-sen-TEE-voh", cat:"Program", note:"Money provided by Energy Trust to help offset upgrade costs. ¿Hay incentivos disponibles? (Are there incentives available?)" },
+  { en:"Eligible", es:"Elegible", pron:"eh-leh-HEE-bleh", cat:"Program", note:"¿Es elegible para este programa? (Are you eligible for this program?) Based on home type, utility, and income." },
+  { en:"Community Action Agency", es:"Agencia de Acción Comunitaria", pron:"ah-HEN-see-ah deh ak-see-OHN", cat:"Program", note:"CAA provides free weatherization and HVAC to income-qualified residents. Always ask about CAA referral during assessment." },
+  { en:"Weatherization", es:"Sellado climático", pron:"seh-YAH-doh klee-MAH-tee-koh", cat:"Program", note:"Free services from CAA for low-income homes including air sealing, insulation, and HVAC repairs." },
+  { en:"Income qualified", es:"Calificado por ingresos", pron:"kah-lee-fee-KAH-doh por een-GREH-sohs", cat:"Program", note:"Household income within program limits. Key CPF eligibility factor. Use Moderate Income Chart on form." },
+  { en:"Manufactured home", es:"Casa prefabricada", pron:"KAH-sah preh-fah-bree-KAH-dah", cat:"Program", note:"Also called mobile home. Eligible for CPF. Different insulation assumptions by age — use HUD tag to determine year." },
+  { en:"HUD tag", es:"Etiqueta HUD", pron:"eh-tee-KEH-tah HOO-dee", cat:"Program", note:"Metal plate on manufactured home exterior — shows build date and construction standard. Used to estimate insulation R-value." },
+  { en:"Single-family home", es:"Casa unifamiliar", pron:"KAH-sah oo-nee-fah-mee-lee-AR", cat:"Program", note:"Detached home — eligible for CPF. Attached units (plexes, townhomes) are not currently eligible." },
+  { en:"Customer Authorization Form", es:"Formulario de autorización del cliente", pron:"for-moo-LAH-ree-oh deh ow-toh-ree-sah-see-OHN", cat:"Program", note:"Form 300 CPF. Must be signed by customer and community partner each time. Sent to communitypartners@energytrust.org." },
+  { en:"Data Intake Form", es:"Formulario de recopilación de datos", pron:"for-moo-LAH-ree-oh deh reh-koh-pee-lah-see-OHN", cat:"Program", note:"One-page HEA form capturing all home systems and upgrade recommendations. Submitted with customer auth form." },
+  { en:"Trade ally", es:"Aliado comercial", pron:"ah-lee-AH-doh koh-mehr-see-AHL", cat:"Program", note:"Energy Trust-approved contractor network. Refer customers to trade allies for qualifying upgrades." },
+  { en:"Unconditioned space", es:"Espacio no acondicionado", pron:"es-PAH-see-oh noh ah-kon-dee-see-oh-NAH-doh", cat:"Program", note:"Unheated areas like garages, crawl spaces, and attics. Ideal location for heat pump water heater install." },
+  { en:"Conditioned space", es:"Espacio acondicionado", pron:"es-PAH-see-oh ah-kon-dee-see-oh-NAH-doh", cat:"Program", note:"Heated/cooled living area. Important for water heater placement — HPWH works better in unconditioned space." },
+  { en:"Retrofit", es:"Mejora energética", pron:"meh-HOH-rah eh-nehr-HEH-tee-kah", cat:"Program", note:"Energy upgrade installed in an existing home. Ask if any previous retrofits have been done." },
+  { en:"Utility provider", es:"Proveedor de servicios públicos", pron:"proh-veh-eh-DOR deh sehr-VEE-see-ohs", cat:"Program", note:"Must be PGE, Pacific Power, NW Natural, Cascade Natural Gas, or Avista for CPF eligibility." },
+  { en:"Electric meter", es:"Medidor eléctrico", pron:"meh-dee-DOR eh-LEK-tree-koh", cat:"Program", note:"Outdoor device that measures electricity use. Used to verify utility provider on-site." },
+  { en:"Gas meter", es:"Medidor de gas", pron:"meh-dee-DOR deh gahs", cat:"Program", note:"Outdoor device showing gas utility. Check brand/provider to confirm eligibility." },
+  { en:"Energy Saver Kit", es:"Kit de ahorro de energía", pron:"keet deh ah-OH-rroh deh eh-nehr-HEE-ah", cat:"Program", note:"Free kit mailed to customer — includes LED bulbs and low-flow showerhead. Call 1.866.691.1766. No-cost upgrade option." },
+  { en:"Direct install", es:"Instalación directa", pron:"een-stah-lah-see-OHN dee-REK-tah", cat:"Program", note:"Items installed during or alongside the assessment at no cost — LEDs, showerheads, aerators." },
+  { en:"Sliding glass door", es:"Puerta corrediza de vidrio", pron:"PWEHR-tah koh-reh-DEE-sah deh VEE-dree-oh", cat:"Program", note:"Qualifies for Energy Trust window incentives — same as windows." },
+
+  // Windows & Envelope
+  { en:"Single pane window", es:"Ventana de un solo vidrio", pron:"ven-TAH-nah deh oon SOH-loh VEE-dree-oh", cat:"Windows & Envelope", note:"Least efficient. Recommend replacement with double pane if broken or non-functioning." },
+  { en:"Double pane window", es:"Ventana de doble vidrio", pron:"ven-TAH-nah deh DOH-bleh VEE-dree-oh", cat:"Windows & Envelope", note:"Standard efficient window. Look for fog between panes (failed seal)." },
+  { en:"Window frame", es:"Marco de ventana", pron:"MAR-koh deh ven-TAH-nah", cat:"Windows & Envelope", note:"Vinyl = most efficient; Wood = middle; Metal = least efficient. Note type during assessment." },
+  { en:"Vinyl frame", es:"Marco de vinilo", pron:"MAR-koh deh vee-NEE-loh", cat:"Windows & Envelope", note:"Most thermally efficient frame material. Common in newer homes." },
+  { en:"Metal frame", es:"Marco metálico", pron:"MAR-koh meh-TAH-lee-koh", cat:"Windows & Envelope", note:"Least efficient frame — conducts heat and cold. Note as upgrade opportunity." },
+  { en:"Drafty window", es:"Ventana con corriente de aire", pron:"ven-TAH-nah kon koh-ree-EN-teh", cat:"Windows & Envelope", note:"May only need caulking between frame and trim — not necessarily a full replacement." },
+  { en:"Air leak", es:"Fuga de aire", pron:"FOO-gah deh EYE-reh", cat:"Windows & Envelope", note:"Gaps where conditioned air escapes. Common around windows, doors, light fixtures, and penetrations." },
+  { en:"Door", es:"Puerta", pron:"PWEHR-tah", cat:"Windows & Envelope", note:"Check for drafts and weatherstripping condition. ¿Hay corriente de aire por la puerta? (Is there a draft from the door?)" },
+  { en:"Caulking", es:"Sellado con masilla", pron:"seh-YAH-doh kon mah-SEE-yah", cat:"Windows & Envelope", note:"Inexpensive fix for drafty windows before recommending full replacement." },
+
+  // Foundation & Moisture
+  { en:"Slab on grade", es:"Losa sobre terreno", pron:"LOH-sah SOH-breh teh-REH-noh", cat:"Foundation", note:"Concrete floor poured directly on ground. No crawl space — no floor insulation upgrade possible." },
+  { en:"Crawlspace with vapor barrier", es:"Espacio con barrera de vapor", pron:"es-PAH-see-oh kon bah-REH-rah", cat:"Foundation", note:"Better moisture control than bare soil. Note condition of vapor barrier during crawl space inspection." },
+  { en:"Full basement", es:"Sótano completo", pron:"SOH-tah-noh kom-PLEH-toh", cat:"Foundation", note:"Below-grade living or utility space. Check for moisture, insulation on walls/ceiling, and duct condition." },
+  { en:"Half basement", es:"Semisótano", pron:"seh-mee-SOH-tah-noh", cat:"Foundation", note:"Partially below grade. Note foundation type on data intake form." },
+  { en:"Moisture", es:"Humedad", pron:"oo-meh-DAHD", cat:"Foundation", note:"Key concern in crawl spaces and basements. ¿Hay humedad en el piso? (Is there moisture on the floor?)" },
+  { en:"Duct insulation", es:"Aislamiento de ductos", pron:"ahy-slah-mee-EN-toh deh DOOK-tohs", cat:"Foundation", note:"Insulation wrap on ducts running through unconditioned spaces. Note if absent or damaged." },
+  { en:"Disconnected duct", es:"Ducto desconectado", pron:"DOOK-toh des-ko-nek-TAH-doh", cat:"Foundation", note:"Separated duct sections in crawl space or attic — major energy loss. Flag for contractor repair." },
 ];
 
 const phrases = [
@@ -422,6 +532,60 @@ const phrases = [
     translations: {
       en: "Your application is approved / pending — we will follow up with you.",
       es: "Su solicitud está aprobada / pendiente — haremos seguimiento con usted."
+    }
+  },
+  {
+    scenario: "Insulation Check",
+    en: ["I need to", "check the insulation", "in your attic", "and crawl space", "may I go up"],
+    es: ["Necesito", "revisar el aislamiento", "en su ático", "y el espacio bajo el piso", "¿puedo subir?"],
+    translations: {
+      en: "I need to check the insulation in your attic and crawl space — may I go up?",
+      es: "Necesito revisar el aislamiento en su ático y el espacio bajo el piso — ¿puedo subir?"
+    }
+  },
+  {
+    scenario: "Safety Check",
+    en: ["Do you have", "a smoke detector", "and a carbon monoxide detector", "on each floor"],
+    es: ["¿Tiene usted", "un detector de humo", "y un detector de monóxido de carbono", "en cada piso"],
+    translations: {
+      en: "Do you have a smoke detector and a carbon monoxide detector on each floor?",
+      es: "¿Tiene usted un detector de humo y un detector de monóxido de carbono en cada piso?"
+    }
+  },
+  {
+    scenario: "Upgrade Recommendation",
+    en: ["Based on", "what I saw today", "I recommend", "adding insulation", "and a heat pump"],
+    es: ["Basado en", "lo que vi hoy", "le recomiendo", "agregar aislamiento", "y una bomba de calor"],
+    translations: {
+      en: "Based on what I saw today, I recommend adding insulation and a heat pump.",
+      es: "Basado en lo que vi hoy, le recomiendo agregar aislamiento y una bomba de calor."
+    }
+  },
+  {
+    scenario: "CAA Referral",
+    en: ["You may qualify", "for free services", "through the community action agency", "I will refer you"],
+    es: ["Es posible que califique", "para servicios gratuitos", "a través de la agencia de acción comunitaria", "lo voy a referir"],
+    translations: {
+      en: "You may qualify for free services through the community action agency — I will refer you.",
+      es: "Es posible que califique para servicios gratuitos a través de la agencia de acción comunitaria — lo voy a referir."
+    }
+  },
+  {
+    scenario: "Thermostat",
+    en: ["Your home has", "a non-programmable thermostat", "with WiFi", "you could save money", "with a smart thermostat"],
+    es: ["Su casa tiene", "un termostato no programable", "con WiFi", "podría ahorrar dinero", "con un termostato inteligente"],
+    translations: {
+      en: "Your home has a non-programmable thermostat and WiFi — you could save money with a smart thermostat.",
+      es: "Su casa tiene un termostato no programable y WiFi — podría ahorrar dinero con un termostato inteligente."
+    }
+  },
+  {
+    scenario: "Water Heater",
+    en: ["Your water heater", "is electric", "and over 10 years old", "a heat pump water heater", "would reduce your bill"],
+    es: ["Su calentador de agua", "es eléctrico", "y tiene más de 10 años", "un calentador tipo bomba de calor", "reduciría su factura"],
+    translations: {
+      en: "Your water heater is electric and over 10 years old — a heat pump water heater would reduce your bill.",
+      es: "Su calentador de agua es eléctrico y tiene más de 10 años — un calentador tipo bomba de calor reduciría su factura."
     }
   }
 ];
