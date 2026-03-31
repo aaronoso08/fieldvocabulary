@@ -28,7 +28,7 @@
   /* NAV */
   nav { background: var(--charcoal); padding: 0 1.25rem; display: flex; align-items: stretch; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 2px 12px rgba(0,0,0,0.3); }
   .nav-logo { color: #fff; font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; padding-right: 1.25rem; border-right: 1px solid var(--charcoal3); margin-right: 0.25rem; white-space: nowrap; gap: 8px; }
-  .nav-logo-icon { background: var(--orange); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 3px 7px; border-radius: 5px; letter-spacing: 0.04em; }
+  .nav-logo-icon { background: var(--orange); width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
   .nav-tabs { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .nav-tab { color: rgba(255,255,255,0.5); font-size: 0.82rem; font-weight: 500; padding: 0 1rem; display: flex; align-items: center; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s; min-height: 48px; }
   .nav-tab:hover { color: rgba(255,255,255,0.85); }
@@ -141,7 +141,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo"><span class="nav-logo-icon">ET</span> Field Vocab</div>
+  <div class="nav-logo"><span class="nav-logo-icon"></span> Field Vocab</div>
   <div class="nav-tabs">
     <div class="nav-tab active" onclick="showPage('glossary')">Glossary</div>
     <div class="nav-tab" onclick="showPage('flashcards')">Flashcards</div>
@@ -220,6 +220,7 @@
       <option value="Building">Building</option>
       <option value="Lighting">Lighting</option>
       <option value="Utility">Utility</option>
+      <option value="Construction">Construction</option>
       <option value="Mixed">Mixed</option>
     </select>
     <button class="ws-new-btn" onclick="generatePuzzle()">New Puzzle</button>
@@ -259,6 +260,34 @@ const vocab = [
   { en:"Energy efficiency", es:"Eficiencia energética", pron:"eh-fee-see-EN-see-ah", cat:"Utility", note:"Core goal of the assessment — explain benefits clearly." },
   { en:"Rebate", es:"Reembolso", pron:"reh-em-BOHL-soh", cat:"Utility", note:"Explain: puede recibir dinero de vuelta (you may get money back)." },
   { en:"Qualification", es:"Calificación", pron:"kah-lee-fee-kah-see-OHN", cat:"Utility", note:"Household must meet income guidelines for CPF program." },
+  // Construction
+  { en:"Ladder", es:"Escalera", pron:"es-kah-LEH-rah", cat:"Construction", note:"Always confirm ladder placement is safe before climbing. ¿Dónde pongo la escalera? (Where should I put the ladder?)" },
+  { en:"Drill", es:"Taladro", pron:"tah-LAH-droh", cat:"Construction", note:"Common tool on job sites. ¿Tienes un taladro? (Do you have a drill?)" },
+  { en:"Nail gun", es:"Pistola de clavos", pron:"pees-TOH-lah deh KLAH-vohs", cat:"Construction", note:"Confirm area is clear before use." },
+  { en:"Caulk", es:"Sellador", pron:"seh-yah-DOR", cat:"Construction", note:"Used to seal gaps and air leaks around windows, doors, and penetrations." },
+  { en:"Spray foam", es:"Espuma de sellado", pron:"es-POO-mah deh seh-YAH-doh", cat:"Construction", note:"Expanding foam for larger gaps and penetrations in walls or attics." },
+  { en:"Pipe", es:"Tubería", pron:"too-beh-REE-ah", cat:"Construction", note:"Check pipe insulation in unconditioned spaces." },
+  { en:"Valve", es:"Válvula", pron:"VAHL-voo-lah", cat:"Construction", note:"Shut-off valves are important to locate before starting work." },
+  { en:"Wiring", es:"Cableado", pron:"kah-bleh-AH-doh", cat:"Construction", note:"Note knob-and-tube or aluminum wiring — affects insulation eligibility." },
+  { en:"Drywall", es:"Panel de yeso", pron:"pah-NEL deh YEH-soh", cat:"Construction", note:"Also called tablaroca in Mexico. Common wall finish." },
+  { en:"Subfloor", es:"Subsuelo", pron:"soob-SWEH-loh", cat:"Construction", note:"Layer beneath finished flooring — relevant for crawl space assessments." },
+  { en:"Joist", es:"Vigueta", pron:"vee-GEH-tah", cat:"Construction", note:"Floor or ceiling framing members. Important for crawl space insulation work." },
+  { en:"Rafter", es:"Cabrio", pron:"KAH-bree-oh", cat:"Construction", note:"Sloped roof framing — relevant for attic insulation." },
+  { en:"Stud", es:"Montante", pron:"mon-TAHN-teh", cat:"Construction", note:"Vertical wall framing member. Used for locating blocking and penetrations." },
+  { en:"Vapor barrier", es:"Barrera de vapor", pron:"bah-REH-rah deh vah-POR", cat:"Construction", note:"Plastic sheeting used in crawl spaces to control moisture." },
+  { en:"Caulking gun", es:"Pistola de sellador", pron:"pees-TOH-lah deh seh-yah-DOR", cat:"Construction", note:"Tool used to apply caulk/sealant around gaps." },
+  { en:"Permit", es:"Permiso", pron:"pehr-MEE-soh", cat:"Construction", note:"Ask: ¿Se necesita permiso para este trabajo? (Is a permit needed for this work?)" },
+  { en:"Contractor", es:"Contratista", pron:"kon-trah-TEES-tah", cat:"Construction", note:"The company or individual performing the installation work." },
+  { en:"Subcontractor", es:"Subcontratista", pron:"soob-kon-trah-TEES-tah", cat:"Construction", note:"A contractor hired by the primary contractor to do specific work." },
+  { en:"Work order", es:"Orden de trabajo", pron:"OR-den deh trah-BAH-hoh", cat:"Construction", note:"Document authorizing specific work to be completed." },
+  { en:"Measurement", es:"Medida", pron:"meh-DEE-dah", cat:"Construction", note:"¿Cuál es la medida? (What is the measurement?)" },
+  { en:"Square footage", es:"Pies cuadrados", pron:"pee-EHS kwah-DRAH-dohs", cat:"Construction", note:"Used to calculate insulation quantities and rebate amounts." },
+  { en:"Roof", es:"Techo / Tejado", pron:"TEH-choh / teh-HAH-doh", cat:"Construction", note:"Tejado refers to the exterior roof surface; techo can mean ceiling or roof." },
+  { en:"Foundation", es:"Cimientos", pron:"see-mee-EN-tohs", cat:"Construction", note:"Base structure of the home — relevant for moisture and thermal assessments." },
+  { en:"Siding", es:"Revestimiento", pron:"reh-ves-tee-mee-EN-toh", cat:"Construction", note:"Exterior wall cladding. Note material type during assessment." },
+  { en:"Safety glasses", es:"Lentes de seguridad", pron:"LEN-tes deh seh-goo-ree-DAHD", cat:"Construction", note:"Required PPE on active job sites." },
+  { en:"Hard hat", es:"Casco de seguridad", pron:"KAS-koh deh seh-goo-ree-DAHD", cat:"Construction", note:"Required on active construction sites." },
+  { en:"Gloves", es:"Guantes", pron:"GWAHN-tes", cat:"Construction", note:"Required when handling insulation or spray foam materials." },
 ];
 
 const phrases = [
