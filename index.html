@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Field Vocab — Energy Trust of Oregon</title>
+<style>
+  :root {
+    --orange: #f97316;
+    --orange-light: #fff4ed;
+    --orange-dark: #ea6c0a;
+    --charcoal: #1c1c1e;
+    --charcoal2: #2c2c2e;
+    --charcoal3: #3a3a3c;
+    --bg: #f2f2f7;
+    --white: #ffffff;
+    --text: #1c1c1e;
+    --muted: #6b6b72;
+    --border: #d1d1d6;
+    --border2: #e5e5ea;
+    --radius: 10px;
+    --shadow: 0 1px 6px rgba(0,0,0,0.08), 0 2px 16px rgba(0,0,0,0.04);
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { background: var(--charcoal); padding: 0 1.25rem; display: flex; align-items: stretch; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 2px 12px rgba(0,0,0,0.3); }
+  .nav-logo { color: #fff; font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; padding-right: 1.25rem; border-right: 1px solid var(--charcoal3); margin-right: 0.25rem; white-space: nowrap; gap: 8px; }
+  .nav-logo-icon { background: var(--orange); color: #fff; font-size: 0.7rem; font-weight: 800; padding: 3px 7px; border-radius: 5px; letter-spacing: 0.04em; }
+  .nav-tabs { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .nav-tab { color: rgba(255,255,255,0.5); font-size: 0.82rem; font-weight: 500; padding: 0 1rem; display: flex; align-items: center; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.15s; min-height: 48px; }
+  .nav-tab:hover { color: rgba(255,255,255,0.85); }
+  .nav-tab.active { color: #fff; border-bottom-color: var(--orange); }
+  .lang-toggle { margin-left: auto; display: flex; align-items: center; gap: 4px; padding-left: 1rem; flex-shrink: 0; }
+  .lang-btn { font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid var(--charcoal3); background: transparent; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.15s; letter-spacing: 0.03em; }
+  .lang-btn.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+  /* PAGES */
+  .page { display: none; max-width: 960px; margin: 0 auto; padding: 1.75rem 1.25rem 4rem; }
+  .page.active { display: block; }
+  .page-title { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; letter-spacing: -0.02em; }
+  .page-sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.5rem; }
+
+  /* GLOSSARY */
+  .search-wrap { position: relative; margin-bottom: 1rem; }
+  .search-wrap input { width: 100%; padding: 0.7rem 1rem 0.7rem 2.5rem; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font); font-size: 0.95rem; background: var(--white); color: var(--text); outline: none; transition: border 0.15s; box-shadow: var(--shadow); }
+  .search-wrap input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(249,115,22,0.12); }
+  .search-icon { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; }
+  .cat-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .cat-pill { padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.12s; color: var(--muted); }
+  .cat-pill.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr)); gap: 10px; }
+  .gcard { background: var(--white); border: 1px solid var(--border2); border-radius: var(--radius); padding: 0.9rem 1rem; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s; box-shadow: var(--shadow); }
+  .gcard:hover { border-color: var(--border); box-shadow: 0 2px 14px rgba(0,0,0,0.1); }
+  .gcard-cat { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--orange); margin-bottom: 5px; }
+  .gcard-en { font-size: 1rem; font-weight: 600; color: var(--text); }
+  .gcard-es { font-size: 0.9rem; color: var(--muted); margin-top: 2px; }
+  .gcard-pron { font-size: 0.75rem; color: var(--orange); margin-top: 4px; font-style: italic; }
+  .gcard-detail { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border2); font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .gcard.open .gcard-detail { display: block; }
+  .no-results { text-align: center; color: var(--muted); padding: 3rem 0; font-size: 0.9rem; }
+
+  /* FLASHCARDS */
+  .fc-controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; align-items: center; }
+  .fc-cat-select { padding: 7px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font); font-size: 0.85rem; background: var(--white); color: var(--text); outline: none; cursor: pointer; box-shadow: var(--shadow); }
+  .fc-mode-wrap { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .fc-mode-btn { padding: 6px 14px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; background: var(--white); color: var(--muted); transition: all 0.12s; }
+  .fc-mode-btn.active { background: var(--charcoal); color: #fff; }
+  .fc-arena { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .fc-card { width: 100%; max-width: 500px; min-height: 190px; background: var(--white); border: 1px solid var(--border2); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: var(--shadow); user-select: none; }
+  .fc-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+  .fc-card.flipped { border-color: var(--orange); background: var(--orange-light); }
+  .fc-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-bottom: 10px; }
+  .fc-word { font-size: 1.75rem; font-weight: 700; color: var(--text); line-height: 1.2; letter-spacing: -0.02em; }
+  .fc-answer { font-size: 1.05rem; color: var(--orange-dark); margin-top: 10px; font-weight: 600; }
+  .fc-pron { font-size: 0.78rem; color: var(--muted); margin-top: 5px; font-style: italic; }
+  .fc-hint { font-size: 0.75rem; color: var(--border); margin-top: 8px; }
+  .fc-btns { display: flex; gap: 10px; }
+  .fc-btn { padding: 9px 24px; border-radius: var(--radius); border: 1px solid var(--border); font-family: var(--font); font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.12s; }
+  .fc-btn:active { transform: scale(0.97); }
+  .fc-btn-skip { background: var(--white); color: var(--muted); }
+  .fc-btn-got { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .fc-btn-got:hover { background: var(--orange-dark); }
+  .fc-progress { font-size: 0.8rem; color: var(--muted); }
+  .fc-done { text-align: center; padding: 2.5rem 1rem; }
+  .fc-done-title { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+  .fc-restart { margin-top: 1rem; padding: 9px 22px; border-radius: var(--radius); background: var(--orange); border: none; color: #fff; font-family: var(--font); font-weight: 700; cursor: pointer; font-size: 0.88rem; }
+
+  /* PHRASE BUILDER */
+  .pb-scenario { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .pb-scen-btn { padding: 5px 13px; border-radius: 20px; border: 1px solid var(--border); background: var(--white); font-size: 0.8rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.12s; }
+  .pb-scen-btn.active { background: var(--charcoal); border-color: var(--charcoal); color: #fff; }
+  .pb-phrase-box { background: var(--white); border: 1px solid var(--border2); border-radius: var(--radius); min-height: 68px; padding: 0.9rem 1rem; display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 0.9rem; transition: border-color 0.15s; box-shadow: var(--shadow); }
+  .pb-phrase-box.has-words { border-color: var(--orange); }
+  .pb-word-chip { background: var(--charcoal); color: #fff; border-radius: 7px; padding: 5px 12px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: background 0.12s; display: flex; align-items: center; gap: 5px; }
+  .pb-word-chip:hover { background: #c0392b; }
+  .pb-word-chip .rm { font-size: 0.7rem; opacity: 0.6; }
+  .pb-placeholder { color: var(--border); font-size: 0.88rem; }
+  .pb-actions { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .pb-action-btn { padding: 7px 16px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--white); font-family: var(--font); font-size: 0.82rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.12s; }
+  .pb-action-btn:hover { border-color: var(--charcoal); color: var(--charcoal); }
+  .pb-translation { background: #fff4ed; border: 1px solid #fed7aa; border-radius: var(--radius); padding: 0.8rem 1rem; font-size: 0.92rem; color: var(--charcoal); margin-bottom: 1.25rem; display: none; font-weight: 500; }
+  .pb-translation.show { display: block; }
+  .pb-bank-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .pb-bank { display: flex; flex-wrap: wrap; gap: 7px; }
+  .pb-bank-chip { background: var(--white); border: 1px solid var(--border); border-radius: 7px; padding: 5px 12px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.12s; color: var(--text); box-shadow: var(--shadow); }
+  .pb-bank-chip:hover { border-color: var(--orange); color: var(--orange-dark); background: var(--orange-light); }
+  .pb-bank-chip.used { opacity: 0.3; pointer-events: none; }
+
+  /* WORD SEARCH */
+  .ws-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 1.25rem; }
+  .ws-select { padding: 7px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font); font-size: 0.85rem; background: var(--white); color: var(--text); outline: none; cursor: pointer; box-shadow: var(--shadow); }
+  .ws-new-btn { padding: 7px 16px; border-radius: var(--radius); background: var(--orange); border: none; color: #fff; font-family: var(--font); font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+  .ws-new-btn:hover { background: var(--orange-dark); }
+  .ws-layout { display: grid; grid-template-columns: 1fr 260px; gap: 1.25rem; }
+  @media (max-width: 680px) { .ws-layout { grid-template-columns: 1fr; } }
+  .ws-grid-wrap { overflow-x: auto; }
+  .ws-grid { display: inline-grid; gap: 2px; user-select: none; }
+  .ws-cell { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 700; border-radius: 5px; cursor: pointer; color: var(--text); background: var(--white); border: 1px solid var(--border2); transition: background 0.08s; }
+  .ws-cell.selecting { background: #fed7aa; border-color: var(--orange); color: var(--charcoal); }
+  .ws-cell.found { background: #dcfce7; border-color: #86efac; color: #15803d; }
+  .ws-words-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .ws-word-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .ws-word-item { font-size: 0.84rem; color: var(--text); padding: 6px 9px; border-radius: 7px; border: 1px solid var(--border2); background: var(--white); display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
+  .ws-word-item.found { text-decoration: line-through; color: var(--muted); background: #dcfce7; border-color: #86efac; }
+  .ws-word-item .ws-translation { font-size: 0.74rem; color: var(--muted); }
+  .ws-congrats { margin-top: 1rem; background: #dcfce7; border: 1px solid #86efac; border-radius: var(--radius); padding: 0.9rem; text-align: center; font-weight: 700; color: #15803d; display: none; font-size: 0.9rem; }
+  .ws-congrats.show { display: block; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .nav-logo { font-size: 0.88rem; }
+    .page-title { font-size: 1.25rem; }
+    .glossary-grid { grid-template-columns: 1fr; }
+    .ws-cell { width: 24px; height: 24px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span class="nav-logo-icon">ET</span> Field Vocab</div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showPage('glossary')">Glossary</div>
+    <div class="nav-tab" onclick="showPage('flashcards')">Flashcards</div>
+    <div class="nav-tab" onclick="showPage('phrases')">Phrases</div>
+    <div class="nav-tab" onclick="showPage('wordsearch')">Word Search</div>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="lb-en">EN</button>
+    <button class="lang-btn" onclick="setLang('es')" id="lb-es">ES</button>
+  </div>
+</nav>
+
+<!-- GLOSSARY -->
+<div class="page active" id="page-glossary">
+  <div class="page-title" id="gl-title">Field Vocabulary</div>
+  <div class="page-sub" id="gl-sub">Search and browse English–Spanish terms used in home energy assessments.</div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="gl-search" placeholder="Search terms..." oninput="renderGlossary()"/>
+  </div>
+  <div class="cat-filters" id="gl-cats"></div>
+  <div class="glossary-grid" id="gl-grid"></div>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="page" id="page-flashcards">
+  <div class="page-title">Flashcards</div>
+  <div class="page-sub">Tap the card to reveal the answer. Mark it to track progress.</div>
+  <div class="fc-controls">
+    <select class="fc-cat-select" id="fc-cat" onchange="buildDeck()">
+      <option value="All">All categories</option>
+    </select>
+    <div class="fc-mode-wrap">
+      <button class="fc-mode-btn active" onclick="setFcMode('en')" id="fcm-en">EN → ES</button>
+      <button class="fc-mode-btn" onclick="setFcMode('es')" id="fcm-es">ES → EN</button>
+    </div>
+  </div>
+  <div class="fc-arena">
+    <div class="fc-card" id="fc-card" onclick="fcFlip()">
+      <div class="fc-label" id="fc-label">English</div>
+      <div class="fc-word" id="fc-word">—</div>
+      <div class="fc-answer" id="fc-answer" style="display:none"></div>
+      <div class="fc-pron" id="fc-pron" style="display:none"></div>
+      <div class="fc-hint" id="fc-hint">tap to reveal</div>
+    </div>
+    <div class="fc-btns" id="fc-btns" style="display:none">
+      <button class="fc-btn fc-btn-skip" onclick="fcNext(false)">Try again</button>
+      <button class="fc-btn fc-btn-got" onclick="fcNext(true)">Got it ✓</button>
+    </div>
+    <div class="fc-progress" id="fc-prog"></div>
+  </div>
+</div>
+
+<!-- PHRASES -->
+<div class="page" id="page-phrases">
+  <div class="page-title">Phrase Builder</div>
+  <div class="page-sub">Build field phrases by tapping words. Switch between English and Spanish.</div>
+  <div class="pb-scenario" id="pb-scenarios"></div>
+  <div class="pb-phrase-box" id="pb-phrase-box"><span class="pb-placeholder" id="pb-placeholder">Tap words below to build your phrase...</span></div>
+  <div class="pb-actions">
+    <button class="pb-action-btn" onclick="pbTranslate()">Show translation</button>
+    <button class="pb-action-btn" onclick="pbClear()">Clear</button>
+  </div>
+  <div class="pb-translation" id="pb-translation"></div>
+  <div class="pb-bank-title" id="pb-bank-title">WORD BANK</div>
+  <div class="pb-bank" id="pb-bank"></div>
+</div>
+
+<!-- WORD SEARCH -->
+<div class="page" id="page-wordsearch">
+  <div class="page-title">Word Search</div>
+  <div class="page-sub">Find field vocabulary hidden in the grid. Click the first and last letter of each word.</div>
+  <div class="ws-controls">
+    <select class="ws-select" id="ws-cat" onchange="generatePuzzle()">
+      <option value="HVAC">HVAC</option>
+      <option value="Building">Building</option>
+      <option value="Lighting">Lighting</option>
+      <option value="Utility">Utility</option>
+      <option value="Mixed">Mixed</option>
+    </select>
+    <button class="ws-new-btn" onclick="generatePuzzle()">New Puzzle</button>
+  </div>
+  <div class="ws-layout">
+    <div class="ws-grid-wrap"><div class="ws-grid" id="ws-grid"></div></div>
+    <div class="ws-words">
+      <div class="ws-words-title">Find these words</div>
+      <ul class="ws-word-list" id="ws-word-list"></ul>
+      <div class="ws-congrats" id="ws-congrats">¡Excelente! You found them all! 🎉</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const vocab = [
+  { en:"Furnace", es:"Calentador", pron:"kah-len-tah-DOR", cat:"HVAC", note:"The main heating unit in a home. Ask: ¿Cuántos años tiene el calentador? (How old is the furnace?)" },
+  { en:"Water heater", es:"Calentador de agua", pron:"kah-len-tah-DOR deh AH-gwah", cat:"HVAC", note:"Ask about age and fuel type. ¿Es de gas o eléctrico? (Is it gas or electric?)" },
+  { en:"Air conditioner", es:"Aire acondicionado", pron:"EYE-reh ah-kon-dee-see-oh-NAH-doh", cat:"HVAC", note:"Often called 'el AC' informally." },
+  { en:"Thermostat", es:"Termostato", pron:"tehr-moh-STAH-toh", cat:"HVAC", note:"Ask: ¿Puede mostrarme el termostato? (Can you show me the thermostat?)" },
+  { en:"Ductwork", es:"Ductos", pron:"DOOK-tohs", cat:"HVAC", note:"Check for leaks or disconnected sections in crawl spaces and attics." },
+  { en:"Attic", es:"Ático", pron:"AH-tee-koh", cat:"Building", note:"Key area for insulation assessment. ¿Puedo ver el ático? (May I see the attic?)" },
+  { en:"Crawl space", es:"Espacio bajo el piso", pron:"es-PAH-see-oh BAH-hoh", cat:"Building", note:"Often where moisture and insulation issues are found." },
+  { en:"Basement", es:"Sótano", pron:"SOH-tah-noh", cat:"Building", note:"Not all homes have one — confirm before looking." },
+  { en:"Insulation", es:"Aislamiento", pron:"ahy-slah-mee-EN-toh", cat:"Building", note:"Assess type and depth. R-value determines effectiveness." },
+  { en:"Weather stripping", es:"Burlete", pron:"boor-LEH-teh", cat:"Building", note:"Seals gaps around doors and windows." },
+  { en:"Electrical panel", es:"Panel eléctrico", pron:"pah-NEL eh-LEK-tree-koh", cat:"Building", note:"Note amperage and condition." },
+  { en:"Outlet", es:"Enchufe", pron:"en-CHOO-feh", cat:"Building", note:"Also called tomacorriente in some regions." },
+  { en:"Window", es:"Ventana", pron:"ven-TAH-nah", cat:"Building", note:"Single vs. double pane makes a big energy difference." },
+  { en:"Ceiling", es:"Techo", pron:"TEH-choh", cat:"Building", note:"Check for air leaks at light fixtures and fan boxes." },
+  { en:"Light bulb", es:"Foco", pron:"FOH-koh", cat:"Lighting", note:"Also called bombilla. LED = more efficient." },
+  { en:"LED light", es:"Luz LED", pron:"looz LED", cat:"Lighting", note:"Recommend LED replacements as part of assessment." },
+  { en:"Fixture", es:"Luminaria", pron:"loo-mee-NAH-ree-ah", cat:"Lighting", note:"Note count and type per room." },
+  { en:"Electricity bill", es:"Factura de luz", pron:"fahk-TOO-rah deh looz", cat:"Utility", note:"Ask to review 12 months if possible for accurate baseline." },
+  { en:"Gas bill", es:"Factura de gas", pron:"fahk-TOO-rah deh gahs", cat:"Utility", note:"Important for homes with gas heating or water heaters." },
+  { en:"Energy efficiency", es:"Eficiencia energética", pron:"eh-fee-see-EN-see-ah", cat:"Utility", note:"Core goal of the assessment — explain benefits clearly." },
+  { en:"Rebate", es:"Reembolso", pron:"reh-em-BOHL-soh", cat:"Utility", note:"Explain: puede recibir dinero de vuelta (you may get money back)." },
+  { en:"Qualification", es:"Calificación", pron:"kah-lee-fee-kah-see-OHN", cat:"Utility", note:"Household must meet income guidelines for CPF program." },
+];
+
+const phrases = [
+  {
+    scenario: "Introductions",
+    en: ["I am", "here to", "do an", "energy assessment", "of your home", "today"],
+    es: ["Estoy", "aquí para", "hacer una", "evaluación de energía", "de su casa", "hoy"],
+    translations: {
+      en: "I am here to do an energy assessment of your home today.",
+      es: "Estoy aquí para hacer una evaluación de energía de su casa hoy."
+    }
+  },
+  {
+    scenario: "Utility Bills",
+    en: ["May I", "look at", "your electricity bill", "and your gas bill", "please"],
+    es: ["¿Puedo", "ver", "su factura de luz", "y su factura de gas", "por favor"],
+    translations: {
+      en: "May I look at your electricity bill and your gas bill please?",
+      es: "¿Puedo ver su factura de luz y su factura de gas por favor?"
+    }
+  },
+  {
+    scenario: "Equipment Age",
+    en: ["How old", "is your", "furnace", "water heater", "air conditioner"],
+    es: ["¿Cuántos años tiene", "su", "calentador", "calentador de agua", "aire acondicionado"],
+    translations: {
+      en: "How old is your furnace / water heater / air conditioner?",
+      es: "¿Cuántos años tiene su calentador / calentador de agua / aire acondicionado?"
+    }
+  },
+  {
+    scenario: "Access Request",
+    en: ["May I", "please see", "the attic", "the basement", "the crawl space"],
+    es: ["¿Puedo", "ver por favor", "el ático", "el sótano", "el espacio bajo el piso"],
+    translations: {
+      en: "May I please see the attic / basement / crawl space?",
+      es: "¿Puedo ver por favor el ático / sótano / espacio bajo el piso?"
+    }
+  },
+  {
+    scenario: "Benefits",
+    en: ["This program", "can help you", "reduce your bill", "save energy", "at no cost"],
+    es: ["Este programa", "puede ayudarle a", "reducir su factura", "ahorrar energía", "sin costo"],
+    translations: {
+      en: "This program can help you reduce your bill and save energy at no cost.",
+      es: "Este programa puede ayudarle a reducir su factura y ahorrar energía sin costo."
+    }
+  }
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let lang = 'en';
+let glCat = 'All';
+let fcMode = 'en';
+let fcDeck = [], fcIdx = 0, fcFlipped = false;
+let pbScenario = 0, pbWords = [];
+let wsGrid = [], wsWords = [], wsCells = [], wsFound = new Set();
+let wsSelecting = false, wsStart = null, wsCurrent = [];
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'wordsearch' && wsGrid.length === 0) generatePuzzle();
+  if (id === 'flashcards') buildDeck();
+}
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('lb-en').classList.toggle('active', l === 'en');
+  document.getElementById('lb-es').classList.toggle('active', l === 'es');
+  renderGlossary();
+  renderPhraseBuilder();
+  // update page text
+  document.getElementById('gl-title').textContent = l === 'en' ? 'Field Vocabulary' : 'Vocabulario de Campo';
+  document.getElementById('gl-sub').textContent = l === 'en'
+    ? 'Search and browse English–Spanish terms used in home energy assessments.'
+    : 'Busca y explora términos en inglés–español usados en evaluaciones de energía del hogar.';
+}
+
+// ─── GLOSSARY ────────────────────────────────────────────────────────────────
+const cats = ['All', ...new Set(vocab.map(v => v.cat))];
+function renderCatFilters() {
+  const el = document.getElementById('gl-cats');
+  el.innerHTML = cats.map(c =>
+    `<div class="cat-pill ${c === glCat ? 'active' : ''}" onclick="setGlCat('${c}')">${c}</div>`
+  ).join('');
+}
+function setGlCat(c) { glCat = c; renderCatFilters(); renderGlossary(); }
+
+function renderGlossary() {
+  const q = document.getElementById('gl-search').value.toLowerCase();
+  const filtered = vocab.filter(v => {
+    const matchCat = glCat === 'All' || v.cat === glCat;
+    const matchQ = !q || v.en.toLowerCase().includes(q) || v.es.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  const grid = document.getElementById('gl-grid');
+  if (!filtered.length) { grid.innerHTML = `<div class="no-results">No results found.</div>`; return; }
+  grid.innerHTML = filtered.map((v, i) => `
+    <div class="gcard" id="gc-${i}" onclick="toggleCard(${i})">
+      <div class="gcard-cat">${v.cat}</div>
+      <div class="gcard-en">${lang === 'en' ? v.en : v.es}</div>
+      <div class="gcard-es">${lang === 'en' ? v.es : v.en}</div>
+      <div class="gcard-pron">${v.pron}</div>
+      <div class="gcard-detail">${v.note}</div>
+    </div>
+  `).join('');
+}
+function toggleCard(i) {
+  const el = document.getElementById('gc-' + i);
+  if (el) el.classList.toggle('open');
+}
+
+// ─── FLASHCARDS ──────────────────────────────────────────────────────────────
+function populateFcCats() {
+  const sel = document.getElementById('fc-cat');
+  cats.forEach(c => {
+    if (c !== 'All') { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); }
+  });
+}
+function setFcMode(m) {
+  fcMode = m;
+  document.getElementById('fcm-en').classList.toggle('active', m === 'en');
+  document.getElementById('fcm-es').classList.toggle('active', m === 'es');
+  buildDeck();
+}
+function buildDeck() {
+  const cat = document.getElementById('fc-cat').value;
+  const base = cat === 'All' ? vocab : vocab.filter(v => v.cat === cat);
+  fcDeck = [...base].sort(() => Math.random() - 0.5);
+  fcIdx = 0; fcFlipped = false;
+  showFcCard();
+}
+function showFcCard() {
+  const done = document.getElementById('fc-done');
+  if (fcIdx >= fcDeck.length) {
+    document.getElementById('fc-card').style.display = 'none';
+    document.getElementById('fc-btns').style.display = 'none';
+    document.getElementById('fc-prog').innerHTML = `
+      <div class="fc-done">
+        <div class="fc-done-title">¡Bien hecho! All done.</div>
+        <div style="color:var(--muted);font-size:0.9rem">You went through all ${fcDeck.length} cards.</div>
+        <button class="fc-restart" onclick="buildDeck()">Shuffle & Restart</button>
+      </div>`;
+    return;
+  }
+  document.getElementById('fc-card').style.display = 'flex';
+  document.getElementById('fc-btns').style.display = 'none';
+  document.getElementById('fc-card').classList.remove('flipped');
+  const v = fcDeck[fcIdx];
+  const front = fcMode === 'en' ? v.en : v.es;
+  const back = fcMode === 'en' ? v.es : v.en;
+  document.getElementById('fc-label').textContent = fcMode === 'en' ? 'English' : 'Español';
+  document.getElementById('fc-word').textContent = front;
+  document.getElementById('fc-answer').textContent = back;
+  document.getElementById('fc-answer').style.display = 'none';
+  document.getElementById('fc-pron').textContent = v.pron;
+  document.getElementById('fc-pron').style.display = 'none';
+  document.getElementById('fc-hint').textContent = 'tap to reveal';
+  document.getElementById('fc-prog').textContent = `${fcIdx + 1} of ${fcDeck.length} — ${v.cat}`;
+  fcFlipped = false;
+}
+function fcFlip() {
+  if (fcFlipped) return;
+  fcFlipped = true;
+  document.getElementById('fc-card').classList.add('flipped');
+  document.getElementById('fc-answer').style.display = 'block';
+  document.getElementById('fc-pron').style.display = 'block';
+  document.getElementById('fc-hint').textContent = '';
+  document.getElementById('fc-btns').style.display = 'flex';
+}
+function fcNext(got) {
+  if (!got) fcDeck.push(fcDeck[fcIdx]);
+  fcIdx++;
+  showFcCard();
+}
+
+// ─── PHRASE BUILDER ───────────────────────────────────────────────────────────
+function renderPhraseBuilder() {
+  const scens = document.getElementById('pb-scenarios');
+  scens.innerHTML = phrases.map((p, i) =>
+    `<button class="pb-scen-btn ${i === pbScenario ? 'active' : ''}" onclick="setPbScenario(${i})">${p.scenario}</button>`
+  ).join('');
+  renderPbBank();
+  renderPbPhrase();
+}
+function setPbScenario(i) { pbScenario = i; pbWords = []; renderPhraseBuilder(); }
+function renderPbBank() {
+  const p = phrases[pbScenario];
+  const words = lang === 'en' ? p.en : p.es;
+  document.getElementById('pb-bank').innerHTML = words.map((w, i) =>
+    `<div class="pb-bank-chip ${pbWords.includes(i) ? 'used' : ''}" onclick="pbAddWord(${i})">${w}</div>`
+  ).join('');
+  document.getElementById('pb-bank-title').textContent = lang === 'en' ? 'WORD BANK — English' : 'BANCO DE PALABRAS — Español';
+}
+function pbAddWord(i) {
+  if (pbWords.includes(i)) return;
+  pbWords.push(i);
+  document.getElementById('pb-translation').classList.remove('show');
+  renderPbPhrase();
+  renderPbBank();
+}
+function renderPbPhrase() {
+  const p = phrases[pbScenario];
+  const words = lang === 'en' ? p.en : p.es;
+  const box = document.getElementById('pb-phrase-box');
+  const placeholder = document.getElementById('pb-placeholder');
+  if (!pbWords.length) {
+    box.classList.remove('has-words');
+    box.innerHTML = '<span class="pb-placeholder">Tap words below to build your phrase...</span>';
+    return;
+  }
+  box.classList.add('has-words');
+  box.innerHTML = pbWords.map((wi, pos) =>
+    `<div class="pb-word-chip" onclick="pbRemoveWord(${pos})">${words[wi]} <span class="rm">✕</span></div>`
+  ).join('');
+}
+function pbRemoveWord(pos) {
+  pbWords.splice(pos, 1);
+  document.getElementById('pb-translation').classList.remove('show');
+  renderPbPhrase();
+  renderPbBank();
+}
+function pbTranslate() {
+  const p = phrases[pbScenario];
+  const trans = lang === 'en' ? p.translations.es : p.translations.en;
+  const label = lang === 'en' ? '🇲🇽 Spanish: ' : '🇺🇸 English: ';
+  const el = document.getElementById('pb-translation');
+  el.textContent = label + trans;
+  el.classList.add('show');
+}
+function pbClear() {
+  pbWords = [];
+  document.getElementById('pb-translation').classList.remove('show');
+  renderPbPhrase();
+  renderPbBank();
+}
+
+// ─── WORD SEARCH ──────────────────────────────────────────────────────────────
+const GRID_SIZE = 14;
+const DIRECTIONS = [[0,1],[1,0],[1,1],[1,-1],[-1,1],[0,-1],[-1,0],[-1,-1]];
+
+function getWsWords() {
+  const cat = document.getElementById('ws-cat').value;
+  let pool = cat === 'Mixed' ? vocab : vocab.filter(v => v.cat === cat);
+  // Use English words, strip spaces, uppercase, max 10 chars
+  const words = pool.map(v => ({ display: v.en, translation: v.es, key: v.en.replace(/\s/g,'').toUpperCase().slice(0,10) }));
+  return words.filter(w => w.key.length >= 3).slice(0, 8);
+}
+
+function generatePuzzle() {
+  wsFound = new Set();
+  wsSelecting = false; wsStart = null; wsCurrent = [];
+  wsWords = getWsWords();
+
+  // init grid with dots
+  wsGrid = Array.from({length: GRID_SIZE}, () => Array(GRID_SIZE).fill(''));
+
+  // place words
+  const placed = [];
+  for (const word of wsWords) {
+    let success = false;
+    for (let attempt = 0; attempt < 200 && !success; attempt++) {
+      const [dr, dc] = DIRECTIONS[Math.floor(Math.random() * 4)]; // only 4 primary directions
+      const r = Math.floor(Math.random() * GRID_SIZE);
+      const c = Math.floor(Math.random() * GRID_SIZE);
+      const len = word.key.length;
+      const endR = r + dr * (len - 1);
+      const endC = c + dc * (len - 1);
+      if (endR < 0 || endR >= GRID_SIZE || endC < 0 || endC >= GRID_SIZE) continue;
+      let conflict = false;
+      for (let i = 0; i < len; i++) {
+        const cr = r + dr * i, cc = c + dc * i;
+        if (wsGrid[cr][cc] && wsGrid[cr][cc] !== word.key[i]) { conflict = true; break; }
+      }
+      if (conflict) continue;
+      for (let i = 0; i < len; i++) wsGrid[r + dr * i][c + dc * i] = word.key[i];
+      placed.push({ ...word, r, c, dr, dc });
+      success = true;
+    }
+  }
+  wsWords = placed;
+
+  // fill blanks
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let r = 0; r < GRID_SIZE; r++)
+    for (let c = 0; c < GRID_SIZE; c++)
+      if (!wsGrid[r][c]) wsGrid[r][c] = alpha[Math.floor(Math.random() * alpha.length)];
+
+  renderWsGrid();
+  renderWsList();
+  document.getElementById('ws-congrats').classList.remove('show');
+}
+
+function renderWsGrid() {
+  const el = document.getElementById('ws-grid');
+  el.style.gridTemplateColumns = `repeat(${GRID_SIZE}, auto)`;
+  el.innerHTML = '';
+  wsCells = [];
+  for (let r = 0; r < GRID_SIZE; r++) {
+    wsCells[r] = [];
+    for (let c = 0; c < GRID_SIZE; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'ws-cell';
+      cell.textContent = wsGrid[r][c];
+      cell.dataset.r = r; cell.dataset.c = c;
+      cell.addEventListener('mousedown', wsMouseDown);
+      cell.addEventListener('mouseenter', wsMouseEnter);
+      cell.addEventListener('mouseup', wsMouseUp);
+      cell.addEventListener('touchstart', wsTouchStart, {passive:true});
+      cell.addEventListener('touchmove', wsTouchMove, {passive:true});
+      cell.addEventListener('touchend', wsTouchEnd, {passive:true});
+      el.appendChild(cell);
+      wsCells[r][c] = cell;
+    }
+  }
+}
+
+function renderWsList() {
+  document.getElementById('ws-word-list').innerHTML = wsWords.map((w, i) =>
+    `<li class="ws-word-item ${wsFound.has(i) ? 'found' : ''}" id="wsl-${i}">
+      <span>${w.display}</span>
+      <span class="ws-translation">${w.translation}</span>
+    </li>`
+  ).join('');
+}
+
+function wsGetCell(e) {
+  const r = parseInt(e.target.dataset.r), c = parseInt(e.target.dataset.c);
+  return isNaN(r) ? null : {r, c};
+}
+function wsGetCellFromTouch(touch) {
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!el || !el.dataset.r) return null;
+  return {r: parseInt(el.dataset.r), c: parseInt(el.dataset.c)};
+}
+
+function wsMouseDown(e) { const p = wsGetCell(e); if (p) wsBegin(p); }
+function wsMouseEnter(e) { const p = wsGetCell(e); if (p && wsSelecting) wsMove(p); }
+function wsMouseUp(e) { wsEnd(); }
+function wsTouchStart(e) { const p = wsGetCellFromTouch(e.touches[0]); if (p) wsBegin(p); }
+function wsTouchMove(e) { const p = wsGetCellFromTouch(e.touches[0]); if (p && wsSelecting) wsMove(p); }
+function wsTouchEnd(e) { wsEnd(); }
+document.addEventListener('mouseup', wsEnd);
+
+function wsBegin(p) { wsSelecting = true; wsStart = p; wsCurrent = [p]; wsHighlight(); }
+function wsMove(p) {
+  if (!wsStart) return;
+  // determine direction
+  let dr = Math.sign(p.r - wsStart.r), dc = Math.sign(p.c - wsStart.c);
+  if (dr === 0 && dc === 0) { wsCurrent = [wsStart]; wsHighlight(); return; }
+  const cells = [];
+  let cr = wsStart.r, cc = wsStart.c;
+  while (cr >= 0 && cr < GRID_SIZE && cc >= 0 && cc < GRID_SIZE) {
+    cells.push({r: cr, c: cc});
+    if (cr === p.r && cc === p.c) break;
+    cr += dr; cc += dc;
+  }
+  wsCurrent = cells;
+  wsHighlight();
+}
+function wsEnd() {
+  if (!wsSelecting) return;
+  wsSelecting = false;
+  wsCheck();
+  wsCurrent = [];
+  wsHighlight();
+}
+function wsHighlight() {
+  for (let r = 0; r < GRID_SIZE; r++)
+    for (let c = 0; c < GRID_SIZE; c++) {
+      const cell = wsCells[r][c];
+      const isSel = wsCurrent.some(p => p.r === r && p.c === c);
+      cell.classList.toggle('selecting', isSel && !isFoundCell(r,c));
+    }
+}
+function isFoundCell(r, c) {
+  for (const idx of wsFound) {
+    const w = wsWords[idx];
+    for (let i = 0; i < w.key.length; i++)
+      if (w.r + w.dr*i === r && w.c + w.dc*i === c) return true;
+  }
+  return false;
+}
+function wsCheck() {
+  if (!wsCurrent.length) return;
+  const selected = wsCurrent.map(p => wsGrid[p.r][p.c]).join('');
+  wsWords.forEach((w, i) => {
+    if (wsFound.has(i)) return;
+    const rev = w.key.split('').reverse().join('');
+    if (selected === w.key || selected === rev) {
+      wsFound.add(i);
+      document.getElementById('wsl-' + i).classList.add('found');
+      markFoundCells(w);
+      if (wsFound.size === wsWords.length) setTimeout(() => document.getElementById('ws-congrats').classList.add('show'), 300);
+    }
+  });
+}
+function markFoundCells(w) {
+  for (let i = 0; i < w.key.length; i++) {
+    wsCells[w.r + w.dr*i][w.c + w.dc*i].classList.add('found');
+    wsCells[w.r + w.dr*i][w.c + w.dc*i].classList.remove('selecting');
+  }
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderCatFilters();
+renderGlossary();
+populateFcCats();
+buildDeck();
+renderPhraseBuilder();
+</script>
+</body>
+</html>
