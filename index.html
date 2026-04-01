@@ -137,6 +137,65 @@
     .glossary-grid { grid-template-columns: 1fr; }
     .ws-cell { width: 24px; height: 24px; font-size: 0.7rem; }
   }
+
+  /* ACRONYMS PAGE */
+  .ac-tabs { display: flex; gap: 8px; margin-bottom: 1.25rem; }
+  .ac-tab-btn { padding: 7px 18px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--white); font-family: var(--font); font-size: 0.82rem; font-weight: 600; cursor: pointer; color: var(--muted); transition: all 0.12s; }
+  .ac-tab-btn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+  /* Glossary sub-tab */
+  .ac-search-wrap { position: relative; margin-bottom: 1rem; }
+  .ac-search-wrap input { width: 100%; padding: 0.7rem 1rem 0.7rem 2.5rem; border: 1.5px solid var(--border); border-radius: var(--radius); font-family: var(--font); font-size: 0.95rem; background: var(--white); color: var(--text); outline: none; transition: border 0.15s; box-shadow: var(--shadow); }
+  .ac-search-wrap input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,122,42,0.12); }
+  .ac-search-icon { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 0.9rem; }
+  .ac-cat-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .ac-cat-pill { padding: 4px 12px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.12s; color: var(--muted); }
+  .ac-cat-pill.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .ac-count { font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; }
+  .ac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 10px; }
+  .ac-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s; box-shadow: var(--shadow); }
+  .ac-card:hover { border-color: var(--orange); box-shadow: 0 2px 14px rgba(107,45,15,0.12); }
+  .ac-card.open { border-color: var(--orange); }
+  .ac-card-header { display: flex; align-items: baseline; gap: 10px; }
+  .ac-abbr { font-size: 1.3rem; font-weight: 800; color: var(--brand); letter-spacing: 0.02em; font-family: 'DM Mono', monospace; }
+  .ac-badge { font-size: 0.63rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--orange); background: var(--orange-light); border-radius: 5px; padding: 2px 7px; flex-shrink: 0; }
+  .ac-full { font-size: 0.91rem; font-weight: 600; color: var(--text); margin-top: 4px; }
+  .ac-es { font-size: 0.8rem; color: var(--muted); margin-top: 2px; font-style: italic; }
+  .ac-detail { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .ac-card.open .ac-detail { display: block; }
+  .ac-no-results { text-align: center; color: var(--muted); padding: 3rem 0; font-size: 0.9rem; }
+  @media (max-width: 600px) { .ac-grid { grid-template-columns: 1fr; } }
+
+  /* Flashcard sub-tab */
+  .ac-fc-panel { display: none; }
+  .ac-fc-panel.show { display: block; }
+  .ac-gl-panel { display: none; }
+  .ac-gl-panel.show { display: block; }
+  .acws-panel { display: none; }
+  .acws-panel.show { display: block; }
+
+  /* Acronym Word Search */
+  .acws-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 1.25rem; }
+  .acws-select { padding: 7px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font); font-size: 0.85rem; background: var(--white); color: var(--text); outline: none; cursor: pointer; box-shadow: var(--shadow); }
+  .acws-new-btn { padding: 7px 16px; border-radius: var(--radius); background: var(--orange); border: none; color: #fff; font-family: var(--font); font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+  .acws-new-btn:hover { background: var(--orange-dark); }
+  .acws-hint { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; }
+  .acws-layout { display: grid; grid-template-columns: 1fr 220px; gap: 1.25rem; }
+  @media (max-width: 680px) { .acws-layout { grid-template-columns: 1fr; } }
+  .acws-grid-wrap { overflow-x: auto; }
+  .acws-grid { display: inline-grid; gap: 2px; user-select: none; }
+  .acws-cell { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; border-radius: 5px; cursor: pointer; color: var(--text); background: var(--white); border: 1px solid var(--border2); transition: background 0.08s; font-family: 'DM Mono', monospace; }
+  .acws-cell.selecting { background: #fed7aa; border-color: var(--orange); }
+  .acws-cell.found { background: #dcfce7; border-color: #86efac; color: #15803d; }
+  @media (max-width: 600px) { .acws-cell { width: 24px; height: 24px; font-size: 0.65rem; } }
+  .acws-words-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .acws-word-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .acws-word-item { font-size: 0.82rem; color: var(--text); padding: 6px 9px; border-radius: 7px; border: 1px solid var(--border2); background: var(--white); box-shadow: var(--shadow); }
+  .acws-word-item .acws-abbr-label { font-weight: 800; color: var(--brand); font-family: 'DM Mono', monospace; font-size: 0.85rem; }
+  .acws-word-item .acws-full-label { font-size: 0.72rem; color: var(--muted); display: block; margin-top: 2px; }
+  .acws-word-item.found { text-decoration: line-through; color: var(--muted); background: #dcfce7; border-color: #86efac; }
+  .acws-congrats { margin-top: 1rem; background: #dcfce7; border: 1px solid #86efac; border-radius: var(--radius); padding: 0.9rem; text-align: center; font-weight: 700; color: #15803d; display: none; font-size: 0.9rem; }
+  .acws-congrats.show { display: block; }
 </style>
 </head>
 <body>
@@ -148,6 +207,7 @@
     <div class="nav-tab" onclick="showPage('flashcards')">Flashcards</div>
     <div class="nav-tab" onclick="showPage('phrases')">Phrases</div>
     <div class="nav-tab" onclick="showPage('wordsearch')">Word Search</div>
+    <div class="nav-tab" onclick="showPage('acronyms')">Acronyms</div>
   </div>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')" id="lb-en">EN</button>
@@ -244,7 +304,479 @@
   </div>
 </div>
 
+<!-- ACRONYMS -->
+<div class="page" id="page-acronyms">
+  <div class="page-title">Acronyms</div>
+  <div class="page-sub">Program, field, office, and building science abbreviations for CPF and home energy assessment work.</div>
+
+  <div class="ac-tabs">
+    <button class="ac-tab-btn active" onclick="setAcTab('glossary')">📋 Reference</button>
+    <button class="ac-tab-btn" onclick="setAcTab('flashcards')">🃏 Flashcards</button>
+    <button class="ac-tab-btn" onclick="setAcTab('wordsearch')">🔤 Word Search</button>
+  </div>
+
+  <!-- REFERENCE -->
+  <div class="ac-gl-panel show" id="ac-gl-panel">
+    <div class="ac-search-wrap">
+      <span class="ac-search-icon">🔍</span>
+      <input type="text" id="ac-search" placeholder="Search acronyms..." oninput="renderAcronyms()"/>
+    </div>
+    <div class="ac-cat-filters" id="ac-cats"></div>
+    <div class="ac-count" id="ac-count"></div>
+    <div class="ac-grid" id="ac-grid"></div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="ac-fc-panel" id="ac-fc-panel">
+    <div class="fc-controls">
+      <select class="fc-cat-select" id="acfc-cat" onchange="buildAcDeck()">
+        <option value="All">All categories</option>
+      </select>
+      <div class="fc-mode-wrap">
+        <button class="fc-mode-btn active" onclick="setAcFcMode('abbr')" id="acfcm-abbr">Abbr → Full</button>
+        <button class="fc-mode-btn" onclick="setAcFcMode('full')" id="acfcm-full">Full → Abbr</button>
+      </div>
+    </div>
+    <div class="fc-arena">
+      <div class="fc-card" id="acfc-card" onclick="acFcFlip()">
+        <div class="fc-label" id="acfc-label">Abbreviation</div>
+        <div class="fc-word" id="acfc-word">—</div>
+        <div class="fc-answer" id="acfc-answer" style="display:none"></div>
+        <div class="fc-pron" id="acfc-pron" style="display:none;font-style:normal;font-size:0.78rem;color:var(--muted)"></div>
+        <div class="fc-hint" id="acfc-hint">tap to reveal</div>
+      </div>
+      <div class="fc-btns" id="acfc-btns" style="display:none">
+        <button class="fc-btn fc-btn-skip" onclick="acFcNext(false)">Try again</button>
+        <button class="fc-btn fc-btn-got" onclick="acFcNext(true)">Got it ✓</button>
+      </div>
+      <div class="fc-progress" id="acfc-prog"></div>
+    </div>
+  </div>
+
+  <!-- WORD SEARCH (acronyms only) -->
+  <div class="acws-panel" id="acws-panel">
+    <div class="acws-controls">
+      <select class="acws-select" id="acws-cat" onchange="generateAcPuzzle()">
+        <option value="All">All categories</option>
+      </select>
+      <button class="acws-new-btn" onclick="generateAcPuzzle()">New Puzzle</button>
+    </div>
+    <div class="acws-hint">Find the abbreviations hidden in the grid. Drag from first to last letter.</div>
+    <div class="acws-layout">
+      <div class="acws-grid-wrap"><div class="acws-grid" id="acws-grid"></div></div>
+      <div>
+        <div class="acws-words-title">Find these acronyms</div>
+        <ul class="acws-word-list" id="acws-word-list"></ul>
+        <div class="acws-congrats" id="acws-congrats">🎉 ¡Excelente! All found!</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+// ─── ACRONYMS DATA ────────────────────────────────────────────────────────────
+const acronyms = [
+  // ETO Programs
+  { abbr:"ETO",    full:"Energy Trust of Oregon",                               es:"Fideicomiso de Energía de Oregón",                   cat:"ETO Programs", note:"Independent nonprofit administering energy efficiency and renewable energy programs for Oregon's investor-owned utilities. Funds CPF, Home Retrofit, EPS, and co-implements HOMES/HEAR with ODOE." },
+  { abbr:"CPF",    full:"Community Partner Funding",                            es:"Financiamiento de Socio Comunitario",                cat:"ETO Programs", note:"ETO program providing increased incentives through community-based organizations (CBOs) serving LMI, communities of color, rural, Indigenous, and disability communities. Eligible utilities: PGE, Pacific Power, NW Natural, Cascade Natural Gas, or Avista." },
+  { abbr:"HEA",    full:"Home Energy Assessment",                               es:"Evaluación de Energía del Hogar",                   cat:"ETO Programs", note:"In-home visit documenting all major energy systems (HVAC, insulation, water heater, lighting, envelope). Results recorded on DIF and submitted with Form 300 CPF." },
+  { abbr:"HES",    full:"Home Energy Score",                                    es:"Puntaje de Energía del Hogar",                      cat:"ETO Programs", note:"DOE 1–10 scoring system rating a home's energy efficiency based on structure and equipment. Used by Earth Advantage and ETO as an upgrade-modeling baseline. 10 = most efficient." },
+  { abbr:"EPS",    full:"Energy Performance Score",                             es:"Puntaje de Rendimiento Energético",                 cat:"ETO Programs", note:"Earth Advantage scoring system measuring estimated annual energy use in MMBtu. Used in ETO's EPS New Homes program. Lower score = more efficient." },
+  { abbr:"HOMES",  full:"Home Owner Managing Energy Savings (IRA rebate)",      es:"Programa de Ahorro de Energía para Propietarios",   cat:"ETO Programs", note:"Federal rebate program funded by the IRA. Administered in Oregon by ODOE with ETO and Earth Advantage as implementers. Provides rebates based on modeled or measured energy savings. Not open as of early 2026." },
+  { abbr:"HEAR",   full:"High-Efficiency Electric Home Rebate Act",             es:"Ley de Reembolsos para Hogares Eléctricos",         cat:"ETO Programs", note:"IRA-funded point-of-sale rebate program for LMI households to electrify homes. Covers heat pumps, HPWH, EV chargers, panel upgrades, insulation, and weatherization. Administered by ODOE/ETO. Not open as of early 2026." },
+  { abbr:"PCEF",   full:"Portland Clean Energy Community Benefits Fund",        es:"Fondo de Beneficios Comunitarios de Portland",      cat:"ETO Programs", note:"Portland city fund created by ballot measure to support clean energy in underserved communities. Many CPF partner organizations also receive PCEF grants. ETO aligns CPF incentives with PCEF-funded programs." },
+  { abbr:"WAP",    full:"Weatherization Assistance Program",                    es:"Programa de Asistencia para Climatización",         cat:"ETO Programs", note:"Federally funded program administered through CAAs. Provides free insulation, air sealing, and HVAC repairs to income-qualified households. Always consider a WAP/CAA referral if work is beyond ETO incentive scope." },
+  { abbr:"IRA",    full:"Inflation Reduction Act",                              es:"Ley de Reducción de la Inflación",                  cat:"ETO Programs", note:"2022 federal law authorizing $369B for clean energy, including the HOMES and HEAR rebate programs, 25C tax credit, and ITC expansions. Major funding source for Oregon energy programs." },
+  { abbr:"25C",    full:"Section 25C Home Energy Tax Credit",                   es:"Crédito Fiscal 25C para Mejoras del Hogar",         cat:"ETO Programs", note:"IRS tax credit (up to $3,200/year) for qualifying home energy improvements: heat pumps, insulation, windows, HPWH. Available through Dec 31, 2025 for eligible installations. Stackable with ETO incentives." },
+  { abbr:"PDC",    full:"Program Delivery Contractor",                          es:"Contratista de Entrega del Programa",               cat:"ETO Programs", note:"Contractor or organization that performs HEAs and manages project submissions under CPF. Must be enrolled with ETO and follow all CPF submission requirements." },
+  { abbr:"CBO",    full:"Community-Based Organization",                         es:"Organización Comunitaria",                          cat:"ETO Programs", note:"Nonprofits or agencies enrolled in CPF to serve their clients. Can play Outreach, Navigator, or Delivery roles. Examples: CAAs, culturally specific nonprofits, tribal organizations." },
+  { abbr:"AM",     full:"Account Manager (ETO)",                                es:"Gerente de Cuenta de ETO",                          cat:"ETO Programs", note:"ETO regional staff member supporting enrolled community partners and trade allies. CC your regional AM on all project submissions to communitypartners@energytrust.org." },
+  { abbr:"QA",     full:"Quality Assurance",                                    es:"Aseguramiento de Calidad",                          cat:"ETO Programs", note:"ETO's review process for submitted HEA data and installed measures. May include desk review or field inspection. QA rejections are reduced by thorough QC before submission." },
+  { abbr:"QC",     full:"Quality Control",                                      es:"Control de Calidad",                                cat:"ETO Programs", note:"Internal checks before submitting a project — reviewing forms for completeness, verifying equipment eligibility, confirming customer signature. Prevents QA rejections." },
+  { abbr:"OPUC",   full:"Oregon Public Utility Commission",                     es:"Comisión de Servicios Públicos de Oregón",          cat:"ETO Programs", note:"Oregon regulatory agency overseeing investor-owned utilities and approving ETO's annual budget and operating plans. ETO must demonstrate cost-effectiveness to OPUC." },
+  { abbr:"ODOE",   full:"Oregon Department of Energy",                          es:"Departamento de Energía de Oregón",                 cat:"ETO Programs", note:"State agency administering the HOMES and HEAR rebate programs, Oregon Heat Pump Purchase Program, and other state energy policy. Works alongside ETO on program delivery." },
+  { abbr:"NEEA",   full:"Northwest Energy Efficiency Alliance",                 es:"Alianza de Eficiencia Energética del Noroeste",     cat:"ETO Programs", note:"Regional nonprofit promoting energy efficiency across the Pacific Northwest in partnership with utilities including PGE and Pacific Power. Conducts market transformation work that complements ETO programs." },
+  { abbr:"BPA",    full:"Bonneville Power Administration",                      es:"Administración de Energía Bonneville",              cat:"ETO Programs", note:"Federal agency marketing wholesale power from Pacific Northwest federal dams. Funds some regional energy efficiency programs through utilities. Relevant context for Oregon's grid and rate structure." },
+  { abbr:"PCAF",   full:"Program Cost Assistance Fund",                         es:"Fondo de Asistencia para Costos del Programa",      cat:"ETO Programs", note:"ETO reimbursement fund for enrolled CPF partners — up to $1,000/year for training, equipment, certifications, marketing. Pre-approval required except for PPE. Equipment covered: tablets, ladders, CO monitors, voltage testers, tape measures, flashlights." },
+  { abbr:"EA",     full:"Earth Advantage",                                      es:"Earth Advantage",                                   cat:"ETO Programs", note:"Portland-based nonprofit providing HES ratings, training, and green building certification. Co-implementer with ETO for Oregon's HOMES and HEAR programs. Offers HEA training modules for CPF partners." },
+  { abbr:"AEA",    full:"Association for Energy Affordability",                 es:"Asociación para la Asequibilidad Energética",       cat:"ETO Programs", note:"National organization offering technical training in building science, HVAC, and energy auditing. ETO recommends AEA courses for CPF delivery partners (~$100 each): Building Science, Health & Safety, Heating Systems." },
+  { abbr:"BPI",    full:"Building Performance Institute",                       es:"Instituto de Rendimiento de Edificios",             cat:"ETO Programs", note:"National standards body for home performance work. BPI certification (e.g., Building Analyst Professional) demonstrates technical competency. Referenced in CPF QA standards and PCEF program requirements." },
+  { abbr:"RESNET", full:"Residential Energy Services Network",                  es:"Red de Servicios de Energía Residencial",           cat:"ETO Programs", note:"National organization accrediting HERS raters. RESNET HERS ratings used in new construction energy codes and some retrofit financing programs." },
+  // Utilities
+  { abbr:"PGE",    full:"Portland General Electric",                            es:"Portland General Electric",                         cat:"Utilities", note:"Oregon's largest electric utility serving the Portland metro area. CPF-eligible. Verify by checking the electric meter or bill. PGE customers can stack ETO CPF incentives with PGE's own rebates." },
+  { abbr:"PPL",    full:"Pacific Power & Light (Pacific Power)",                es:"Pacific Power",                                     cat:"Utilities", note:"Investor-owned electric utility serving parts of Oregon including rural areas. CPF-eligible. A subsidiary of PacifiCorp. Check meter or bill to confirm utility." },
+  { abbr:"NWN",    full:"NW Natural",                                           es:"NW Natural (Gas Natural del Noroeste)",             cat:"Utilities", note:"Primary natural gas utility in Portland metro and NW Oregon. CPF-eligible. Verify on gas meter or bill. NWN customers may qualify for both electric and gas-side CPF incentives." },
+  { abbr:"CNG",    full:"Cascade Natural Gas",                                  es:"Cascade Gas Natural",                               cat:"Utilities", note:"Natural gas utility in parts of Oregon and Washington. CPF-eligible. Separate company from NW Natural. Verify on gas meter." },
+  { abbr:"AVA",    full:"Avista Utilities",                                     es:"Avista Servicios Públicos",                         cat:"Utilities", note:"Electric and natural gas utility serving parts of eastern Oregon and Washington. Fifth CPF-eligible utility alongside PGE, Pacific Power, NW Natural, and Cascade Natural Gas." },
+  { abbr:"IOU",    full:"Investor-Owned Utility",                               es:"Empresa de Servicios Públicos Privada",             cat:"Utilities", note:"Privately owned electric or gas utility regulated by OPUC. CPF eligibility is tied to IOU service territory — customers of co-ops or municipal utilities (e.g., EWEB) are not eligible for CPF." },
+  { abbr:"AMI",    full:"Area Median Income",                                   es:"Ingreso Medio del Área",                            cat:"Utilities", note:"HUD benchmark for income eligibility thresholds. CPF primarily targets LMI (≤80% AMI). Moderate-income (80–120% AMI) may qualify for some measures. Limits vary by county and household size — use current MIF chart." },
+  { abbr:"LMI",    full:"Low-to-Moderate Income",                               es:"Ingreso Bajo a Moderado",                           cat:"Utilities", note:"Income category at or below 120% AMI. CPF primarily serves LMI communities. Households at ≤80% AMI qualify for highest CPF incentive tiers and WAP referrals." },
+  { abbr:"kWh",    full:"Kilowatt-Hour",                                        es:"Kilovatio-Hora",                                    cat:"Utilities", note:"Unit of electrical energy on utility bills. 1 kWh = 1,000 watts running 1 hour. Oregon residential average: ~900–1,000 kWh/month. Used to calculate baseline energy use and projected savings." },
+  { abbr:"CCF",    full:"Hundred Cubic Feet (natural gas)",                     es:"Cien Pies Cúbicos de gas",                         cat:"Utilities", note:"Unit on gas utility bills. 1 CCF ≈ 1.02 therms ≈ 100,000 BTU. Oregon average residential winter use: 50–70 CCF/month. Compare month-to-month to identify heating patterns." },
+  // Forms & Admin
+  { abbr:"300CPF", full:"Form 300 CPF – Customer Authorization Form",           es:"Formulario 300 CPF – Autorización del Cliente",     cat:"Forms & Admin", note:"Required CPF form signed by the customer AND the community partner rep at every HEA. Submit to communitypartners@energytrust.org with DIF. CC your regional Account Manager. Include org name and client address in email subject line." },
+  { abbr:"300HPQ", full:"Form 300 HPQ – Heat Pump Questionnaire",              es:"Formulario 300 HPQ – Cuestionario de Bomba de Calor", cat:"Forms & Admin", note:"Required pre-approval form for no-cost heat pump offers (DHP, ducted HP, HPWH). Must be submitted before installation begins. Available in English and Spanish." },
+  { abbr:"371CPF", full:"Form 371 CPF – CPF Participation Agreement",          es:"Formulario 371 CPF – Acuerdo de Participación CPF", cat:"Forms & Admin", note:"Enrollment agreement between the community partner organization and ETO. Must be signed before an organization can submit CPF projects. Includes Multifamily addendum (Form 371CPF-A)." },
+  { abbr:"DIF",    full:"Data Intake Form",                                     es:"Formulario de Recopilación de Datos",               cat:"Forms & Admin", note:"One-page HEA form documenting all home systems, conditions, and upgrade recommendations. Submitted with Form 300 CPF. Captures: utility provider, home type, insulation levels, HVAC, water heater, lighting, and health/safety flags." },
+  { abbr:"MIF",    full:"Moderate Income Form / Income Verification Chart",     es:"Formulario de Verificación de Ingresos",           cat:"Forms & Admin", note:"Chart used to verify customer income eligibility. Based on household size and current AMI limits by county. Must be completed at each HEA. Use the most recent ETO-published income table." },
+  { abbr:"HUD",    full:"Dept. of Housing and Urban Development",               es:"Departamento de Vivienda y Desarrollo Urbano",      cat:"Forms & Admin", note:"Federal agency. HUD tag = metal plate on manufactured homes showing build date and construction standard. Used to estimate existing insulation R-values. Pre-1976 = no standard; 1976+ = HUD Code." },
+  { abbr:"AHJ",    full:"Authority Having Jurisdiction",                        es:"Autoridad con Jurisdicción",                        cat:"Forms & Admin", note:"Local government body enforcing building codes and issuing permits. Ask if a permit is needed before recommending contractor work on HVAC, insulation, or electrical upgrades." },
+  { abbr:"OHCS",   full:"Oregon Housing and Community Services",                es:"Vivienda y Servicios Comunitarios de Oregón",       cat:"Forms & Admin", note:"Oregon state agency administering housing assistance including low-income rental and homeownership programs. CAAs often coordinate with OHCS. Relevant for understanding the broader support landscape for CPF customers." },
+  // HVAC & Equipment
+  { abbr:"HVAC",   full:"Heating, Ventilation and Air Conditioning",            es:"Calefacción, Ventilación y Aire Acondicionado",     cat:"HVAC & Equipment", note:"Umbrella term for all home heating, cooling, and ventilation systems. Includes furnaces, heat pumps, boilers, ductwork, thermostats, ERVs, and AC. HVAC condition and age are key data points on every HEA." },
+  { abbr:"AFUE",   full:"Annual Fuel Utilization Efficiency",                   es:"Eficiencia Anual de Utilización de Combustible",   cat:"HVAC & Equipment", note:"Efficiency rating for gas furnaces/boilers. 80% AFUE = 20 cents of every dollar wasted up the flue. ETO CPF prefers 90%+ AFUE. Single metal flue pipe = non-condensing = ≤80% AFUE = upgrade candidate." },
+  { abbr:"HSPF",   full:"Heating Seasonal Performance Factor",                  es:"Factor de Rendimiento Estacional de Calefacción",  cat:"HVAC & Equipment", note:"Efficiency rating for heat pumps in heating mode. HSPF2 is the current standard with updated test conditions. ETO CPF minimum: HSPF2 ≥ 7.5 for ductless heat pumps." },
+  { abbr:"SEER",   full:"Seasonal Energy Efficiency Ratio",                     es:"Relación de Eficiencia Energética Estacional",     cat:"HVAC & Equipment", note:"Cooling efficiency for heat pumps and AC. SEER2 is the current standard. ETO CPF minimum: SEER2 ≥ 15.2 for most heat pumps. Higher = lower cooling costs." },
+  { abbr:"COP",    full:"Coefficient of Performance",                           es:"Coeficiente de Rendimiento",                       cat:"HVAC & Equipment", note:"Heat pump efficiency ratio at a specific temperature. COP of 3 = 3 units of heat per 1 unit of electricity. Electric resistance = COP of 1. Heat pumps always have COP > 1 — that's why they're recommended over baseboards." },
+  { abbr:"DHP",    full:"Ductless Heat Pump (Mini-Split)",                      es:"Bomba de Calor sin Ductos (Mini-Split)",           cat:"HVAC & Equipment", note:"Key CPF upgrade recommendation for homes with electric resistance zonal heat (baseboards, wall heaters). No ductwork — uses refrigerant lines. Check for secondary heat sources before recommending." },
+  { abbr:"HPWH",   full:"Heat Pump Water Heater",                               es:"Calentador de Agua Tipo Bomba de Calor",           cat:"HVAC & Equipment", note:"2–3x more efficient than standard electric resistance water heaters. Best in unconditioned spaces. ETO CPF recommends for homes with electric resistance WH ≥10–15 years old." },
+  { abbr:"FAF",    full:"Forced Air Furnace",                                   es:"Calefactor de Aire Forzado",                       cat:"HVAC & Equipment", note:"Furnace distributing heat through ductwork with a blower. Most common heating system in Oregon homes. Note fuel type (gas vs. electric), age, and AFUE. Older gas FAF with single flue = upgrade candidate." },
+  { abbr:"DHW",    full:"Domestic Hot Water",                                   es:"Agua Caliente Doméstica",                          cat:"HVAC & Equipment", note:"Hot water for bathing, dishes, and laundry. Systems include storage tank (gas, electric, HPWH) and tankless/on-demand. Note fuel type and age during HEA." },
+  { abbr:"ASHP",   full:"Air Source Heat Pump",                                 es:"Bomba de Calor de Fuente de Aire",                 cat:"HVAC & Equipment", note:"Heat pump extracting heat from outdoor air. Includes ductless (DHP) and ducted versions. Modern cold-climate ASHPs work down to -13°F. Recommended for homes with electric resistance heat." },
+  { abbr:"UEF",    full:"Uniform Energy Factor",                                es:"Factor de Energía Uniforme",                       cat:"HVAC & Equipment", note:"Current efficiency rating for water heaters (replaced EF). Electric resistance WH: UEF ~0.90–0.95. HPWH: UEF ~3.5–4.0. Used to verify HPWH eligibility for CPF incentives." },
+  { abbr:"AHRI",   full:"Air-Conditioning, Heating and Refrigeration Institute", es:"Instituto de Aire Acondicionado y Calefacción",  cat:"HVAC & Equipment", note:"Industry org certifying HVAC efficiency ratings. Use ahridirectory.org to look up model numbers and verify AFUE, SEER2, HSPF2 from equipment labels. Required for CPF equipment eligibility." },
+  { abbr:"ERV",    full:"Energy Recovery Ventilator",                           es:"Ventilador de Recuperación de Energía",            cat:"HVAC & Equipment", note:"Exchanges stale indoor air with fresh outdoor air while transferring both heat and moisture. Important in tightly sealed homes for IAQ. Preferred over HRV in Pacific NW climates." },
+  { abbr:"CAZ",    full:"Combustion Appliance Zone",                            es:"Zona de Aparatos de Combustión",                   cat:"HVAC & Equipment", note:"Area where combustion appliances operate (furnace, water heater). Depressurization in a CAZ can cause CO back-drafting into living space. Flag any CAZ safety concerns on DIF." },
+  // Building Science
+  { abbr:"ACH",    full:"Air Changes per Hour",                                 es:"Cambios de Aire por Hora",                         cat:"Building Science", note:"How often air volume in a building is replaced. ACH50 measured at 50 Pascals (blower door test). Leaky homes: ACH50 > 10. Tight homes: ACH50 < 3. Oregon code for new homes: ≤5 ACH50." },
+  { abbr:"CFM",    full:"Cubic Feet per Minute",                                es:"Pies Cúbicos por Minuto",                          cat:"Building Science", note:"Airflow rate. CFM50 = blower door result at 50 Pascals. Also used for duct leakage testing and exhaust fan ratings. Larger CFM50 = leakier envelope." },
+  { abbr:"BTU",    full:"British Thermal Unit",                                 es:"Unidad Térmica Británica",                         cat:"Building Science", note:"Basic heat energy unit. Furnaces/boilers rated in BTU/hour (BTUH). Typical Oregon home furnace: 40,000–100,000 BTUh. Used in equipment sizing and load calculations." },
+  { abbr:"IAQ",    full:"Indoor Air Quality",                                   es:"Calidad del Aire Interior",                        cat:"Building Science", note:"Health/comfort of indoor air. Poor IAQ from moisture, CO, mold, radon, VOCs, and poor ventilation. Air sealing must be paired with MV to maintain IAQ. Flag concerns on DIF." },
+  { abbr:"RH",     full:"Relative Humidity",                                    es:"Humedad Relativa",                                 cat:"Building Science", note:"Moisture percentage in air. Healthy indoor RH: 30–50%. Crawl spaces with RH > 70% risk mold and wood rot. Signs: condensation on pipes, standing water, musty odor." },
+  { abbr:"BD",     full:"Blower Door",                                          es:"Prueba de Puerta Soplante",                        cat:"Building Science", note:"Diagnostic fan mounted in a door frame to depressurize a home and measure airtightness. Results in CFM50 or ACH50. Used before and after weatherization to quantify air sealing improvements." },
+  { abbr:"ELR",    full:"Envelope Leakage Ratio",                               es:"Relación de Fuga de la Envolvente",                cat:"Building Science", note:"Ratio of air leakage to conditioned floor area. Normalizes blower door results across home sizes. Referenced in PCEF and code compliance standards." },
+  { abbr:"CFA",    full:"Conditioned Floor Area",                               es:"Área de Piso Acondicionado",                       cat:"Building Science", note:"Square footage of heated/cooled living space. Excludes unconditioned garages, unfinished basements, crawl spaces. Used to calculate insulation quantities and heating loads." },
+  { abbr:"HDD",    full:"Heating Degree Days",                                  es:"Grados-Día de Calefacción",                        cat:"Building Science", note:"Measure of climate coldness — cumulative difference between daily average temp and 65°F baseline. Portland: ~4,500 HDD/year. Used for energy modeling and comparing utility bills across seasons." },
+  { abbr:"VOC",    full:"Volatile Organic Compound",                            es:"Compuesto Orgánico Volátil",                       cat:"Building Science", note:"Chemical gases from paints, adhesives, insulation, building materials. Can negatively impact IAQ. Relevant when discussing new insulation or sealing materials in poorly ventilated spaces." },
+  { abbr:"AS",     full:"Air Seal / Air Sealing",                               es:"Sellado de Aire",                                  cat:"Building Science", note:"Closing gaps in the building envelope to reduce uncontrolled air leakage. Common locations: attic top plates, electrical penetrations, plumbing chases. Done before adding insulation. CPF incentives available." },
+  // Insulation & Envelope
+  { abbr:"Rval",   full:"R-Value (Thermal Resistance)",                         es:"Valor-R (Resistencia Térmica)",                    cat:"Insulation", note:"Measures insulation's resistance to heat flow. Higher R = better. ETO CPF requires: R-38 min for attics (if existing ≤R-18); R-30 for floors. Per inch: cellulose ~3.2, fiberglass batts ~3.1, closed-cell spray foam ~6.5." },
+  { abbr:"Ufac",   full:"U-Factor (Thermal Transmittance)",                     es:"Factor-U (Transmitancia Térmica)",                 cat:"Insulation", note:"Inverse of R-value. Measures heat transfer through windows/doors. Lower U = better. ETO CPF window incentives require U ≤ 0.30. Applies to failed or broken single-pane windows." },
+  { abbr:"SHGC",   full:"Solar Heat Gain Coefficient",                          es:"Coeficiente de Ganancia Solar",                    cat:"Insulation", note:"Fraction of solar energy passing through a window. Oregon typically targets SHGC ≤ 0.25 to limit summer overheating. Lower = more sun blocked = better for south/west-facing windows." },
+  { abbr:"SPF",    full:"Spray Polyurethane Foam",                              es:"Espuma de Poliuretano en Aerosol",                 cat:"Insulation", note:"Expanding foam insulation in open-cell (vapor permeable) and closed-cell (R-6.5/inch, vapor barrier) types. Used for rim joists, hard-to-reach areas, unvented roofs." },
+  { abbr:"XPS",    full:"Extruded Polystyrene (rigid foam)",                    es:"Poliestireno Extruido (espuma rígida)",            cat:"Insulation", note:"Rigid foam board (pink or blue, R-5/inch). Water-resistant — used in crawl spaces, below-grade walls, under slabs. Brand names: Foamular, Styrofoam. Different from EPS (white bead board)." },
+  { abbr:"Wx",     full:"Weatherization / Weatherize",                          es:"Climatización / Sellar la Casa",                  cat:"Insulation", note:"Shorthand for weatherization — insulating, air sealing, and improving a home's envelope to reduce energy use. WAP provides free Wx to income-qualified households through CAAs." },
+  // Health & Safety
+  { abbr:"CO",     full:"Carbon Monoxide",                                      es:"Monóxido de Carbono",                              cat:"Health & Safety", note:"Odorless, colorless toxic gas from combustion appliances. Can be fatal. A working CO detector is required on every floor with combustion appliances. If CO suspected: leave immediately, call 911." },
+  { abbr:"PPE",    full:"Personal Protective Equipment",                        es:"Equipo de Protección Personal",                   cat:"Health & Safety", note:"Required gear for attic/crawl space inspections: N95 mask, gloves, bump cap, headlamp, safety glasses. ETO reimburses PPE costs for CPF partners without pre-approval." },
+  { abbr:"GFCI",   full:"Ground Fault Circuit Interrupter",                    es:"Interruptor de Circuito de Falla a Tierra",       cat:"Health & Safety", note:"Electrical safety device cutting power when a ground fault is detected. Required near water: bathrooms, kitchen counters, garages, crawl spaces, outdoor outlets. Check and test during HEA." },
+  { abbr:"OSHA",   full:"Occupational Safety and Health Administration",        es:"Administración de Seguridad y Salud Ocupacional", cat:"Health & Safety", note:"Federal agency setting worker safety standards. Relevant for ladder safety, confined space entry, and PPE requirements. Applies to anyone performing HEAs as paid employment." },
+  { abbr:"NEC",    full:"National Electrical Code",                             es:"Código Eléctrico Nacional",                       cat:"Health & Safety", note:"Standard for safe electrical installations (NFPA 70). Knob-and-tube wiring cannot be covered with insulation per NEC — flag immediately for electrician review." },
+  { abbr:"LEL",    full:"Lower Explosive Limit",                                es:"Límite Explosivo Inferior",                       cat:"Health & Safety", note:"Minimum gas concentration in air at which it can ignite. Natural gas LEL ~5%. If you smell gas: don't operate switches, leave immediately, call the utility." },
+  // Field & Technical
+  { abbr:"SF",     full:"Square Feet",                                          es:"Pies Cuadrados",                                  cat:"Field & Technical", note:"Standard area measurement for insulation quantities, window area, and floor area on the DIF. Measure attic and floor areas to calculate insulation amounts and verify incentive eligibility." },
+  { abbr:"GPM",    full:"Gallons per Minute",                                   es:"Galones por Minuto",                              cat:"Field & Technical", note:"Showerhead and faucet flow rate. Standard: 2.5 GPM. Low-flow: ≤1.75 GPM. ETO Energy Saver Kit includes low-flow showerhead. Kitchen/bathroom aerators at 1.5 GPM save hot water energy." },
+  { abbr:"PV",     full:"Photovoltaics (Solar Panels)",                         es:"Paneles Fotovoltaicos (Paneles Solares)",         cat:"Field & Technical", note:"Solar electricity technology. Not in CPF HEA scope but may come up. Refer to ETO's solar program or ODOE. Note existing PV on DIF as it affects electrical system assessment." },
+  { abbr:"EV",     full:"Electric Vehicle",                                     es:"Vehículo Eléctrico",                              cat:"Field & Technical", note:"Battery-powered vehicle. Relevant if customer asks about EV charger or panel upgrade. HEAR program (when launched) will cover Level 2 EV charger installation for LMI households." },
+  { abbr:"MERV",   full:"Minimum Efficiency Reporting Value",                   es:"Valor Mínimo de Eficiencia de Filtros",           cat:"Field & Technical", note:"HVAC air filter rating (scale 1–20). MERV 8 = standard residential. MERV 13 = captures fine particles and most viruses. Ask about filter change frequency — clogged filters reduce efficiency." },
+  { abbr:"LED",    full:"Light-Emitting Diode",                                 es:"Diodo Emisor de Luz (LED)",                      cat:"Field & Technical", note:"Current standard for efficient lighting. Uses 75% less energy than incandescent, lasts 15–25x longer. Count non-LED fixtures during HEA. ETO Energy Saver Kit includes free LEDs." },
+  { abbr:"NFA",    full:"Net Free Area",                                        es:"Área Libre Neta de Ventilación",                  cat:"Field & Technical", note:"Open area in attic vents allowing air to flow. Calculate to ensure adequate ventilation before adding insulation. Minimum: 1 sq ft NFA per 150 sq ft attic floor area." },
+  { abbr:"IECC",   full:"International Energy Conservation Code",               es:"Código Internacional de Conservación de Energía", cat:"Field & Technical", note:"Model building energy code adopted by most U.S. states. Oregon uses the OEESC based on IECC. Sets minimum R-values, duct sealing, and mechanical requirements for new construction." },
+  { abbr:"OEESC",  full:"Oregon Energy Efficiency Specialty Code",              es:"Código Especial de Eficiencia Energética de Oregón", cat:"Field & Technical", note:"Oregon's building energy code based on IECC with state-specific amendments. Sets minimum insulation, air sealing, and ventilation requirements for new homes — context for what existing homes were built to." },
+  { abbr:"NACHI",  full:"National Assoc. of Certified Home Inspectors",         es:"Asociación Nacional de Inspectores de Vivienda",  cat:"Field & Technical", note:"Organization publishing reference materials for home inspectors, including the Component Life Expectancy Chart. ETO CPF references NACHI charts to estimate remaining useful life of equipment during HEAs." },
+  { abbr:"MV",     full:"Mechanical Ventilation",                               es:"Ventilación Mecánica",                            cat:"Field & Technical", note:"Controlled fresh air exchange using fans, ERVs, or HRVs. Required in tight homes for IAQ. Without MV, a sealed home accumulates moisture, CO2, and VOCs. Flag absence of MV in tight homes on DIF." },
+];
+
+// ─── ACRONYM STATE ────────────────────────────────────────────────────────────
+const acCats = ['All', ...new Set(acronyms.map(a => a.cat))];
+let acCat = 'All';
+let acTab = 'glossary';
+let acFcMode = 'abbr';
+let acFcDeck = [], acFcIdx = 0, acFcFlipped = false;
+
+// Acronym word search state
+let acwsGrid = [], acwsWords = [], acwsCells = [], acwsFound = new Set();
+let acwsSelecting = false, acwsStart = null, acwsCurrent = [];
+const ACWS_SIZE = 14;
+
+function setAcTab(tab) {
+  acTab = tab;
+  document.querySelectorAll('.ac-tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', ['glossary','flashcards','wordsearch'][i] === tab);
+  });
+  document.getElementById('ac-gl-panel').classList.toggle('show', tab === 'glossary');
+  document.getElementById('ac-fc-panel').classList.toggle('show', tab === 'flashcards');
+  document.getElementById('acws-panel').classList.toggle('show', tab === 'wordsearch');
+  if (tab === 'flashcards' && !acFcDeck.length) buildAcDeck();
+  if (tab === 'wordsearch' && !acwsGrid.length) generateAcPuzzle();
+}
+
+// ── Acronym Reference ────────────────────────────────────────────────────────
+function renderAcCatFilters() {
+  const el = document.getElementById('ac-cats');
+  el.innerHTML = acCats.map(c =>
+    `<div class="ac-cat-pill ${c === acCat ? 'active' : ''}" onclick="setAcCat('${c}')">${c}</div>`
+  ).join('');
+}
+function setAcCat(c) { acCat = c; renderAcCatFilters(); renderAcronyms(); }
+
+function renderAcronyms() {
+  const q = (document.getElementById('ac-search').value || '').toLowerCase();
+  const filtered = acronyms.filter(a => {
+    const matchCat = acCat === 'All' || a.cat === acCat;
+    const matchQ = !q || a.abbr.toLowerCase().includes(q) || a.full.toLowerCase().includes(q) || a.es.toLowerCase().includes(q) || a.note.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  document.getElementById('ac-count').textContent = `Showing ${filtered.length} of ${acronyms.length} acronyms`;
+  const grid = document.getElementById('ac-grid');
+  if (!filtered.length) { grid.innerHTML = `<div class="ac-no-results">No acronyms found.</div>`; return; }
+  grid.innerHTML = filtered.map((a, i) => `
+    <div class="ac-card" id="ac-${i}" onclick="toggleAcCard(${i})">
+      <div class="ac-card-header">
+        <div class="ac-abbr">${a.abbr}</div>
+        <div class="ac-badge">${a.cat}</div>
+      </div>
+      <div class="ac-full">${a.full}</div>
+      <div class="ac-es">${a.es}</div>
+      <div class="ac-detail">${a.note}</div>
+    </div>`).join('');
+}
+function toggleAcCard(i) {
+  const el = document.getElementById('ac-' + i);
+  if (el) el.classList.toggle('open');
+}
+
+// ── Acronym Flashcards ────────────────────────────────────────────────────────
+function populateAcFcCats() {
+  const sel = document.getElementById('acfc-cat');
+  acCats.forEach(c => {
+    if (c !== 'All') { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); }
+  });
+}
+function setAcFcMode(m) {
+  acFcMode = m;
+  document.getElementById('acfcm-abbr').classList.toggle('active', m === 'abbr');
+  document.getElementById('acfcm-full').classList.toggle('active', m === 'full');
+  buildAcDeck();
+}
+function buildAcDeck() {
+  const cat = document.getElementById('acfc-cat').value;
+  const base = cat === 'All' ? acronyms : acronyms.filter(a => a.cat === cat);
+  acFcDeck = [...base].sort(() => Math.random() - 0.5);
+  acFcIdx = 0; acFcFlipped = false;
+  showAcFcCard();
+}
+function showAcFcCard() {
+  if (acFcIdx >= acFcDeck.length) {
+    document.getElementById('acfc-card').style.display = 'none';
+    document.getElementById('acfc-btns').style.display = 'none';
+    document.getElementById('acfc-prog').innerHTML = `
+      <div class="fc-done">
+        <div class="fc-done-title">¡Bien hecho! All done.</div>
+        <div style="color:var(--muted);font-size:0.9rem">You went through all ${acFcDeck.length} acronyms.</div>
+        <button class="fc-restart" onclick="buildAcDeck()">Shuffle & Restart</button>
+      </div>`;
+    return;
+  }
+  document.getElementById('acfc-card').style.display = 'flex';
+  document.getElementById('acfc-btns').style.display = 'none';
+  document.getElementById('acfc-card').classList.remove('flipped');
+  const a = acFcDeck[acFcIdx];
+  const front = acFcMode === 'abbr' ? a.abbr : a.full;
+  const back  = acFcMode === 'abbr' ? a.full : a.abbr;
+  document.getElementById('acfc-label').textContent = acFcMode === 'abbr' ? 'Abbreviation' : 'Full Name';
+  document.getElementById('acfc-word').textContent = front;
+  document.getElementById('acfc-answer').textContent = back;
+  document.getElementById('acfc-answer').style.display = 'none';
+  document.getElementById('acfc-pron').textContent = a.cat;
+  document.getElementById('acfc-pron').style.display = 'none';
+  document.getElementById('acfc-hint').textContent = 'tap to reveal';
+  document.getElementById('acfc-prog').textContent = `${acFcIdx + 1} of ${acFcDeck.length} — ${a.cat}`;
+  acFcFlipped = false;
+}
+function acFcFlip() {
+  if (acFcFlipped) return;
+  acFcFlipped = true;
+  document.getElementById('acfc-card').classList.add('flipped');
+  document.getElementById('acfc-answer').style.display = 'block';
+  document.getElementById('acfc-pron').style.display = 'block';
+  document.getElementById('acfc-hint').textContent = '';
+  document.getElementById('acfc-btns').style.display = 'flex';
+}
+function acFcNext(got) {
+  if (!got) acFcDeck.push(acFcDeck[acFcIdx]);
+  acFcIdx++;
+  showAcFcCard();
+}
+
+// ── Acronym Word Search ───────────────────────────────────────────────────────
+const ACWS_DIRS = [[0,1],[1,0],[0,-1],[-1,0]]; // horizontal & vertical only for short acronyms
+
+function populateAcwsCats() {
+  const sel = document.getElementById('acws-cat');
+  acCats.forEach(c => {
+    if (c !== 'All') { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); }
+  });
+}
+
+function getAcwsWords() {
+  const cat = document.getElementById('acws-cat').value;
+  let pool = cat === 'All' ? acronyms : acronyms.filter(a => a.cat === cat);
+  // Use the abbreviation as the search key — strip spaces, uppercase
+  const words = pool.map(a => ({
+    display: a.abbr,
+    full: a.full,
+    key: a.abbr.replace(/[\s\u00A0]/g,'').toUpperCase()
+  })).filter(w => w.key.length >= 2 && w.key.length <= 8 && /^[A-Z0-9]+$/.test(w.key));
+  // shuffle and take up to 8
+  return words.sort(() => Math.random() - 0.5).slice(0, 8);
+}
+
+function generateAcPuzzle() {
+  acwsFound = new Set();
+  acwsSelecting = false; acwsStart = null; acwsCurrent = [];
+  const candidates = getAcwsWords();
+  acwsGrid = Array.from({length: ACWS_SIZE}, () => Array(ACWS_SIZE).fill(''));
+  const placed = [];
+
+  for (const word of candidates) {
+    let success = false;
+    for (let attempt = 0; attempt < 300 && !success; attempt++) {
+      const [dr, dc] = ACWS_DIRS[Math.floor(Math.random() * ACWS_DIRS.length)];
+      const len = word.key.length;
+      // compute valid start range
+      const minR = dr < 0 ? len - 1 : 0;
+      const maxR = dr > 0 ? ACWS_SIZE - len : ACWS_SIZE - 1;
+      const minC = dc < 0 ? len - 1 : 0;
+      const maxC = dc > 0 ? ACWS_SIZE - len : ACWS_SIZE - 1;
+      if (minR > maxR || minC > maxC) continue;
+      const r = minR + Math.floor(Math.random() * (maxR - minR + 1));
+      const c = minC + Math.floor(Math.random() * (maxC - minC + 1));
+      let conflict = false;
+      for (let i = 0; i < len; i++) {
+        const gr = r + dr * i, gc = c + dc * i;
+        if (acwsGrid[gr][gc] && acwsGrid[gr][gc] !== word.key[i]) { conflict = true; break; }
+      }
+      if (conflict) continue;
+      for (let i = 0; i < len; i++) acwsGrid[r + dr * i][c + dc * i] = word.key[i];
+      placed.push({ ...word, r, c, dr, dc });
+      success = true;
+    }
+  }
+  acwsWords = placed;
+
+  // fill blanks with random letters
+  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let r = 0; r < ACWS_SIZE; r++)
+    for (let c = 0; c < ACWS_SIZE; c++)
+      if (!acwsGrid[r][c]) acwsGrid[r][c] = alpha[Math.floor(Math.random() * alpha.length)];
+
+  renderAcwsGrid();
+  renderAcwsList();
+  document.getElementById('acws-congrats').classList.remove('show');
+}
+
+function renderAcwsGrid() {
+  const el = document.getElementById('acws-grid');
+  el.style.gridTemplateColumns = `repeat(${ACWS_SIZE}, auto)`;
+  el.innerHTML = '';
+  acwsCells = [];
+  for (let r = 0; r < ACWS_SIZE; r++) {
+    acwsCells[r] = [];
+    for (let c = 0; c < ACWS_SIZE; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'acws-cell';
+      cell.textContent = acwsGrid[r][c];
+      cell.dataset.r = r; cell.dataset.c = c;
+      cell.addEventListener('mousedown', acwsMouseDown);
+      cell.addEventListener('mouseenter', acwsMouseEnter);
+      cell.addEventListener('mouseup', acwsMouseUp);
+      cell.addEventListener('touchstart', acwsTouchStart, {passive:true});
+      cell.addEventListener('touchmove', acwsTouchMove, {passive:true});
+      cell.addEventListener('touchend', acwsTouchEnd, {passive:true});
+      el.appendChild(cell);
+      acwsCells[r][c] = cell;
+    }
+  }
+}
+
+function renderAcwsList() {
+  document.getElementById('acws-word-list').innerHTML = acwsWords.map((w, i) =>
+    `<li class="acws-word-item ${acwsFound.has(i) ? 'found' : ''}" id="acwsl-${i}">
+      <span class="acws-abbr-label">${w.display}</span>
+      <span class="acws-full-label">${w.full}</span>
+    </li>`).join('');
+}
+
+function acwsGetCell(e) {
+  const r = parseInt(e.target.dataset.r), c = parseInt(e.target.dataset.c);
+  return isNaN(r) ? null : {r, c};
+}
+function acwsGetCellFromTouch(touch) {
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!el || !el.dataset.r) return null;
+  return {r: parseInt(el.dataset.r), c: parseInt(el.dataset.c)};
+}
+function acwsMouseDown(e) { const p = acwsGetCell(e); if (p) acwsBegin(p); }
+function acwsMouseEnter(e) { const p = acwsGetCell(e); if (p && acwsSelecting) acwsMove(p); }
+function acwsMouseUp() { acwsEnd(); }
+function acwsTouchStart(e) { const p = acwsGetCellFromTouch(e.touches[0]); if (p) acwsBegin(p); }
+function acwsTouchMove(e) { const p = acwsGetCellFromTouch(e.touches[0]); if (p && acwsSelecting) acwsMove(p); }
+function acwsTouchEnd() { acwsEnd(); }
+document.addEventListener('mouseup', () => { if (acwsSelecting) acwsEnd(); });
+
+function acwsBegin(p) { acwsSelecting = true; acwsStart = p; acwsCurrent = [p]; acwsHighlight(); }
+function acwsMove(p) {
+  if (!acwsStart) return;
+  const dr = Math.sign(p.r - acwsStart.r), dc = Math.sign(p.c - acwsStart.c);
+  if (dr === 0 && dc === 0) { acwsCurrent = [acwsStart]; acwsHighlight(); return; }
+  // only allow axis-aligned selection (no diagonals)
+  if (dr !== 0 && dc !== 0) return;
+  const cells = [];
+  let cr = acwsStart.r, cc = acwsStart.c;
+  for (let step = 0; step < ACWS_SIZE; step++) {
+    cells.push({r: cr, c: cc});
+    if (cr === p.r && cc === p.c) break;
+    cr += dr; cc += dc;
+    if (cr < 0 || cr >= ACWS_SIZE || cc < 0 || cc >= ACWS_SIZE) break;
+  }
+  acwsCurrent = cells;
+  acwsHighlight();
+}
+function acwsEnd() {
+  if (!acwsSelecting) return;
+  acwsSelecting = false;
+  acwsCheck();
+  acwsCurrent = [];
+  acwsHighlight();
+}
+function acwsHighlight() {
+  for (let r = 0; r < ACWS_SIZE; r++)
+    for (let c = 0; c < ACWS_SIZE; c++) {
+      const isSel = acwsCurrent.some(p => p.r === r && p.c === c);
+      acwsCells[r][c].classList.toggle('selecting', isSel && !acwsIsFoundCell(r, c));
+    }
+}
+function acwsIsFoundCell(r, c) {
+  for (const idx of acwsFound) {
+    const w = acwsWords[idx];
+    for (let i = 0; i < w.key.length; i++)
+      if (w.r + w.dr * i === r && w.c + w.dc * i === c) return true;
+  }
+  return false;
+}
+function acwsCheck() {
+  if (!acwsCurrent.length) return;
+  const selected = acwsCurrent.map(p => acwsGrid[p.r][p.c]).join('');
+  acwsWords.forEach((w, i) => {
+    if (acwsFound.has(i)) return;
+    const rev = w.key.split('').reverse().join('');
+    if (selected === w.key || selected === rev) {
+      acwsFound.add(i);
+      document.getElementById('acwsl-' + i).classList.add('found');
+      acwsMarkFound(w);
+      if (acwsFound.size === acwsWords.length)
+        setTimeout(() => document.getElementById('acws-congrats').classList.add('show'), 300);
+    }
+  });
+}
+function acwsMarkFound(w) {
+  for (let i = 0; i < w.key.length; i++) {
+    acwsCells[w.r + w.dr * i][w.c + w.dc * i].classList.add('found');
+    acwsCells[w.r + w.dr * i][w.c + w.dc * i].classList.remove('selecting');
+  }
+}
+
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const vocab = [
   { en:"Furnace", es:"Calentador", pron:"kah-len-tah-DOR", cat:"HVAC", note:"The main heating unit in a home. Ask: ¿Cuántos años tiene el calentador? (How old is the furnace?)" },
@@ -781,42 +1313,47 @@ function pbClear() {
   renderPbBank();
 }
 
-// ─── WORD SEARCH ──────────────────────────────────────────────────────────────
+// ─── WORD SEARCH (fixed) ─────────────────────────────────────────────────────
 const GRID_SIZE = 14;
-const DIRECTIONS = [[0,1],[1,0],[1,1],[1,-1],[-1,1],[0,-1],[-1,0],[-1,-1]];
+const WS_DIRS = [[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
 
 function getWsWords() {
   const cat = document.getElementById('ws-cat').value;
-  let pool = cat === 'Mixed' ? vocab : vocab.filter(v => v.cat === cat);
-  // Use English words, strip spaces, uppercase, max 10 chars
-  const words = pool.map(v => ({ display: v.en, translation: v.es, key: v.en.replace(/\s/g,'').toUpperCase().slice(0,10) }));
-  return words.filter(w => w.key.length >= 3).slice(0, 8);
+  let pool = cat === 'Mixed'
+    ? vocab.sort(() => Math.random() - 0.5)
+    : vocab.filter(v => v.cat === cat);
+  // Build key: strip non-alpha, uppercase, max 12 chars — keep full word, no mid-cut
+  const words = pool.map(v => {
+    const key = v.en.replace(/[^a-zA-Z]/g, '').toUpperCase();
+    return { display: v.en, translation: v.es, key };
+  }).filter(w => w.key.length >= 3 && w.key.length <= 12);
+  return words.slice(0, 8);
 }
 
 function generatePuzzle() {
   wsFound = new Set();
   wsSelecting = false; wsStart = null; wsCurrent = [];
-  wsWords = getWsWords();
-
-  // init grid with dots
+  const candidates = getWsWords();
   wsGrid = Array.from({length: GRID_SIZE}, () => Array(GRID_SIZE).fill(''));
-
-  // place words
   const placed = [];
-  for (const word of wsWords) {
+
+  for (const word of candidates) {
     let success = false;
-    for (let attempt = 0; attempt < 200 && !success; attempt++) {
-      const [dr, dc] = DIRECTIONS[Math.floor(Math.random() * 4)]; // only 4 primary directions
-      const r = Math.floor(Math.random() * GRID_SIZE);
-      const c = Math.floor(Math.random() * GRID_SIZE);
+    for (let attempt = 0; attempt < 400 && !success; attempt++) {
+      const [dr, dc] = WS_DIRS[Math.floor(Math.random() * WS_DIRS.length)];
       const len = word.key.length;
-      const endR = r + dr * (len - 1);
-      const endC = c + dc * (len - 1);
-      if (endR < 0 || endR >= GRID_SIZE || endC < 0 || endC >= GRID_SIZE) continue;
+      // compute valid start range so word fits entirely inside grid
+      const minR = dr < 0 ? len - 1 : 0;
+      const maxR = dr > 0 ? GRID_SIZE - len : GRID_SIZE - 1;
+      const minC = dc < 0 ? len - 1 : 0;
+      const maxC = dc > 0 ? GRID_SIZE - len : GRID_SIZE - 1;
+      if (minR > maxR || minC > maxC) continue;
+      const r = minR + Math.floor(Math.random() * (maxR - minR + 1));
+      const c = minC + Math.floor(Math.random() * (maxC - minC + 1));
       let conflict = false;
       for (let i = 0; i < len; i++) {
-        const cr = r + dr * i, cc = c + dc * i;
-        if (wsGrid[cr][cc] && wsGrid[cr][cc] !== word.key[i]) { conflict = true; break; }
+        const gr = r + dr * i, gc = c + dc * i;
+        if (wsGrid[gr][gc] && wsGrid[gr][gc] !== word.key[i]) { conflict = true; break; }
       }
       if (conflict) continue;
       for (let i = 0; i < len; i++) wsGrid[r + dr * i][c + dc * i] = word.key[i];
@@ -876,30 +1413,31 @@ function wsGetCell(e) {
 }
 function wsGetCellFromTouch(touch) {
   const el = document.elementFromPoint(touch.clientX, touch.clientY);
-  if (!el || !el.dataset.r) return null;
-  return {r: parseInt(el.dataset.r), c: parseInt(el.dataset.c)};
+  if (!el || el.dataset.r === undefined) return null;
+  const r = parseInt(el.dataset.r), c = parseInt(el.dataset.c);
+  return isNaN(r) ? null : {r, c};
 }
 
 function wsMouseDown(e) { const p = wsGetCell(e); if (p) wsBegin(p); }
 function wsMouseEnter(e) { const p = wsGetCell(e); if (p && wsSelecting) wsMove(p); }
-function wsMouseUp(e) { wsEnd(); }
+function wsMouseUp() { wsEnd(); }
 function wsTouchStart(e) { const p = wsGetCellFromTouch(e.touches[0]); if (p) wsBegin(p); }
 function wsTouchMove(e) { const p = wsGetCellFromTouch(e.touches[0]); if (p && wsSelecting) wsMove(p); }
-function wsTouchEnd(e) { wsEnd(); }
-document.addEventListener('mouseup', wsEnd);
+function wsTouchEnd() { wsEnd(); }
+document.addEventListener('mouseup', () => { if (wsSelecting) wsEnd(); });
 
 function wsBegin(p) { wsSelecting = true; wsStart = p; wsCurrent = [p]; wsHighlight(); }
 function wsMove(p) {
   if (!wsStart) return;
-  // determine direction
-  let dr = Math.sign(p.r - wsStart.r), dc = Math.sign(p.c - wsStart.c);
+  const dr = Math.sign(p.r - wsStart.r), dc = Math.sign(p.c - wsStart.c);
   if (dr === 0 && dc === 0) { wsCurrent = [wsStart]; wsHighlight(); return; }
   const cells = [];
   let cr = wsStart.r, cc = wsStart.c;
-  while (cr >= 0 && cr < GRID_SIZE && cc >= 0 && cc < GRID_SIZE) {
+  for (let step = 0; step < GRID_SIZE * 2; step++) {
     cells.push({r: cr, c: cc});
     if (cr === p.r && cc === p.c) break;
     cr += dr; cc += dc;
+    if (cr < 0 || cr >= GRID_SIZE || cc < 0 || cc >= GRID_SIZE) break;
   }
   wsCurrent = cells;
   wsHighlight();
@@ -914,16 +1452,15 @@ function wsEnd() {
 function wsHighlight() {
   for (let r = 0; r < GRID_SIZE; r++)
     for (let c = 0; c < GRID_SIZE; c++) {
-      const cell = wsCells[r][c];
       const isSel = wsCurrent.some(p => p.r === r && p.c === c);
-      cell.classList.toggle('selecting', isSel && !isFoundCell(r,c));
+      wsCells[r][c].classList.toggle('selecting', isSel && !wsIsFoundCell(r, c));
     }
 }
-function isFoundCell(r, c) {
+function wsIsFoundCell(r, c) {
   for (const idx of wsFound) {
     const w = wsWords[idx];
     for (let i = 0; i < w.key.length; i++)
-      if (w.r + w.dr*i === r && w.c + w.dc*i === c) return true;
+      if (w.r + w.dr * i === r && w.c + w.dc * i === c) return true;
   }
   return false;
 }
@@ -936,15 +1473,16 @@ function wsCheck() {
     if (selected === w.key || selected === rev) {
       wsFound.add(i);
       document.getElementById('wsl-' + i).classList.add('found');
-      markFoundCells(w);
-      if (wsFound.size === wsWords.length) setTimeout(() => document.getElementById('ws-congrats').classList.add('show'), 300);
+      wsMarkFound(w);
+      if (wsFound.size === wsWords.length)
+        setTimeout(() => document.getElementById('ws-congrats').classList.add('show'), 300);
     }
   });
 }
-function markFoundCells(w) {
+function wsMarkFound(w) {
   for (let i = 0; i < w.key.length; i++) {
-    wsCells[w.r + w.dr*i][w.c + w.dc*i].classList.add('found');
-    wsCells[w.r + w.dr*i][w.c + w.dc*i].classList.remove('selecting');
+    wsCells[w.r + w.dr * i][w.c + w.dc * i].classList.add('found');
+    wsCells[w.r + w.dr * i][w.c + w.dc * i].classList.remove('selecting');
   }
 }
 
@@ -954,6 +1492,10 @@ renderGlossary();
 populateFcCats();
 buildDeck();
 renderPhraseBuilder();
+renderAcCatFilters();
+renderAcronyms();
+populateAcFcCats();
+populateAcwsCats();
 </script>
 </body>
 </html>
