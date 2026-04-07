@@ -205,8 +205,6 @@
   <div class="nav-tabs">
     <div class="nav-tab active" onclick="showPage('glossary')">Glossary</div>
     <div class="nav-tab" onclick="showPage('flashcards')">Flashcards</div>
-    <div class="nav-tab" onclick="showPage('phrases')">Phrases</div>
-    <div class="nav-tab" onclick="showPage('wordsearch')">Word Search</div>
     <div class="nav-tab" onclick="showPage('acronyms')">Acronyms</div>
   </div>
   <div class="lang-toggle">
@@ -253,54 +251,6 @@
       <button class="fc-btn fc-btn-got" onclick="fcNext(true)">Got it ✓</button>
     </div>
     <div class="fc-progress" id="fc-prog"></div>
-  </div>
-</div>
-
-<!-- PHRASES -->
-<div class="page" id="page-phrases">
-  <div class="page-title">Phrase Builder</div>
-  <div class="page-sub">Build field phrases by tapping words. Switch between English and Spanish.</div>
-  <div class="pb-scenario" id="pb-scenarios"></div>
-  <div class="pb-phrase-box" id="pb-phrase-box"><span class="pb-placeholder" id="pb-placeholder">Tap words below to build your phrase...</span></div>
-  <div class="pb-actions">
-    <button class="pb-action-btn" onclick="pbTranslate()">Show translation</button>
-    <button class="pb-action-btn" onclick="pbClear()">Clear</button>
-  </div>
-  <div class="pb-translation" id="pb-translation"></div>
-  <div class="pb-bank-title" id="pb-bank-title">WORD BANK</div>
-  <div class="pb-bank" id="pb-bank"></div>
-</div>
-
-<!-- WORD SEARCH -->
-<div class="page" id="page-wordsearch">
-  <div class="page-title">Word Search</div>
-  <div class="page-sub">Find field vocabulary hidden in the grid. Click the first and last letter of each word.</div>
-  <div class="ws-controls">
-    <select class="ws-select" id="ws-cat" onchange="generatePuzzle()">
-      <option value="HVAC">HVAC</option>
-      <option value="Building">Building</option>
-      <option value="Lighting">Lighting</option>
-      <option value="Utility">Utility</option>
-      <option value="Construction">Construction</option>
-      <option value="Office">Office</option>
-      <option value="Scheduling">Scheduling</option>
-      <option value="Insulation">Insulation</option>
-      <option value="Equipment">Equipment</option>
-      <option value="Program">Program</option>
-      <option value="Health &amp; Safety">Health &amp; Safety</option>
-      <option value="Windows &amp; Envelope">Windows &amp; Envelope</option>
-      <option value="Foundation">Foundation</option>
-      <option value="Mixed">Mixed</option>
-    </select>
-    <button class="ws-new-btn" onclick="generatePuzzle()">New Puzzle</button>
-  </div>
-  <div class="ws-layout">
-    <div class="ws-grid-wrap"><div class="ws-grid" id="ws-grid"></div></div>
-    <div class="ws-words">
-      <div class="ws-words-title">Find these words</div>
-      <ul class="ws-word-list" id="ws-word-list"></ul>
-      <div class="ws-congrats" id="ws-congrats">¡Excelente! You found them all! 🎉</div>
-    </div>
   </div>
 </div>
 
