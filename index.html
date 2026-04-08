@@ -256,27 +256,13 @@
 
 <!-- ACRONYMS -->
 <div class="page" id="page-acronyms">
-  <div class="page-title">Acronyms</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0.2rem;">
+    <div class="page-title" style="margin-bottom:0;">Acronyms</div>
+    <button class="ac-tab-btn" id="actab-flashcards" onclick="toggleAcFlashcards()">🃏 Flashcards</button>
+  </div>
   <div class="page-sub">Program, field, office, and building science abbreviations for CPF and home energy assessment work.</div>
 
-  <div class="ac-tabs">
-    <button class="ac-tab-btn active" onclick="setAcTab('glossary')">📋 Reference</button>
-    <button class="ac-tab-btn" onclick="setAcTab('flashcards')">🃏 Flashcards</button>
-    <button class="ac-tab-btn" onclick="setAcTab('wordsearch')">🔤 Word Search</button>
-  </div>
-
-  <!-- REFERENCE -->
-  <div class="ac-gl-panel show" id="ac-gl-panel">
-    <div class="ac-search-wrap">
-      <span class="ac-search-icon">🔍</span>
-      <input type="text" id="ac-search" placeholder="Search acronyms..." oninput="renderAcronyms()"/>
-    </div>
-    <div class="ac-cat-filters" id="ac-cats"></div>
-    <div class="ac-count" id="ac-count"></div>
-    <div class="ac-grid" id="ac-grid"></div>
-  </div>
-
-  <!-- FLASHCARDS -->
+  <!-- FLASHCARDS (hidden by default, slides in) -->
   <div class="ac-fc-panel" id="ac-fc-panel">
     <div class="fc-controls">
       <select class="fc-cat-select" id="acfc-cat" onchange="buildAcDeck()">
@@ -303,24 +289,14 @@
     </div>
   </div>
 
-  <!-- WORD SEARCH (acronyms only) -->
-  <div class="acws-panel" id="acws-panel">
-    <div class="acws-controls">
-      <select class="acws-select" id="acws-cat" onchange="generateAcPuzzle()">
-        <option value="All">All categories</option>
-      </select>
-      <button class="acws-new-btn" onclick="generateAcPuzzle()">New Puzzle</button>
-    </div>
-    <div class="acws-hint">Find the abbreviations hidden in the grid. Drag from first to last letter.</div>
-    <div class="acws-layout">
-      <div class="acws-grid-wrap"><div class="acws-grid" id="acws-grid"></div></div>
-      <div>
-        <div class="acws-words-title">Find these acronyms</div>
-        <ul class="acws-word-list" id="acws-word-list"></ul>
-        <div class="acws-congrats" id="acws-congrats">🎉 ¡Excelente! All found!</div>
-      </div>
-    </div>
+  <!-- ALWAYS-VISIBLE ACRONYM LIST -->
+  <div class="ac-search-wrap">
+    <span class="ac-search-icon">🔍</span>
+    <input type="text" id="ac-search" placeholder="Search acronyms..." oninput="renderAcronyms()"/>
   </div>
+  <div class="ac-cat-filters" id="ac-cats"></div>
+  <div class="ac-count" id="ac-count"></div>
+  <div class="ac-grid" id="ac-grid"></div>
 </div>
 
 <script>
@@ -425,30 +401,47 @@ const acronyms = [
   { abbr:"OEESC",  full:"Oregon Energy Efficiency Specialty Code",              es:"Código Especial de Eficiencia Energética de Oregón", cat:"Field & Technical", note:"Oregon's building energy code based on IECC with state-specific amendments. Sets minimum insulation, air sealing, and ventilation requirements for new homes — context for what existing homes were built to." },
   { abbr:"NACHI",  full:"National Assoc. of Certified Home Inspectors",         es:"Asociación Nacional de Inspectores de Vivienda",  cat:"Field & Technical", note:"Organization publishing reference materials for home inspectors, including the Component Life Expectancy Chart. ETO CPF references NACHI charts to estimate remaining useful life of equipment during HEAs." },
   { abbr:"MV",     full:"Mechanical Ventilation",                               es:"Ventilación Mecánica",                            cat:"Field & Technical", note:"Controlled fresh air exchange using fans, ERVs, or HRVs. Required in tight homes for IAQ. Without MV, a sealed home accumulates moisture, CO2, and VOCs. Flag absence of MV in tight homes on DIF." },
+
+  // Additional Acronyms
+  { abbr:"HRV",    full:"Heat Recovery Ventilator",                              es:"Ventilador de Recuperación de Calor",              cat:"HVAC & Equipment", note:"Exchanges stale indoor air with fresh outdoor air while recovering heat (but not moisture). Similar to ERV but better suited for very cold or very humid climates." },
+  { abbr:"VRF",    full:"Variable Refrigerant Flow",                             es:"Flujo de Refrigerante Variable",                   cat:"HVAC & Equipment", note:"Advanced multi-zone HVAC system using refrigerant lines instead of ductwork. Highly efficient but expensive. Note if present during HEA." },
+  { abbr:"PTAC",   full:"Packaged Terminal Air Conditioner",                     es:"Aire Acondicionado de Terminal Empaquetado",       cat:"HVAC & Equipment", note:"Wall-mounted heating/cooling unit common in apartments and hotels. Note as primary or supplemental heat source on DIF." },
+  { abbr:"AHU",    full:"Air Handling Unit",                                     es:"Unidad Manejadora de Aire",                        cat:"HVAC & Equipment", note:"Indoor component of a split HVAC system that moves air across the coil. Contains the blower, filter, and coil. Check filter condition during HEA." },
+  { abbr:"TXV",    full:"Thermostatic Expansion Valve",                          es:"Válvula de Expansión Termostática",                cat:"HVAC & Equipment", note:"Refrigerant metering device in heat pumps and AC systems. Controls refrigerant flow for optimal efficiency. Failure affects system performance." },
+  { abbr:"NFPA",   full:"National Fire Protection Association",                  es:"Asociación Nacional de Protección contra Incendios", cat:"Health & Safety", note:"Publisher of the National Electrical Code (NEC) and fire safety standards. Referenced when flagging electrical hazards or combustion appliance safety issues." },
+  { abbr:"ADA",    full:"Americans with Disabilities Act",                       es:"Ley de Estadounidenses con Discapacidades",        cat:"Health & Safety", note:"Federal law requiring accessibility accommodations. Relevant when scheduling HEAs for clients with mobility or sensory limitations." },
+  { abbr:"HCS",    full:"Hazard Communication Standard",                         es:"Estándar de Comunicación de Peligros",             cat:"Health & Safety", note:"OSHA standard (29 CFR 1910.1200) requiring Safety Data Sheets for hazardous materials. Relevant when working near spray foam, adhesives, or insulation materials." },
+  { abbr:"SDS",    full:"Safety Data Sheet",                                     es:"Hoja de Datos de Seguridad",                       cat:"Health & Safety", note:"Document with safety and handling information for hazardous materials. Required on job sites. Review before using spray foam or chemical sealants." },
+  { abbr:"ACM",    full:"Asbestos-Containing Material",                          es:"Material que Contiene Asbesto",                    cat:"Health & Safety", note:"Any material with asbestos — common in pre-1980 homes (pipe insulation, floor tiles, popcorn ceilings). Do not disturb. Flag on DIF and stop work until professionally abated." },
+  { abbr:"LBP",    full:"Lead-Based Paint",                                      es:"Pintura a Base de Plomo",                         cat:"Health & Safety", note:"Common in homes built before 1978. Do not sand, scrape, or disturb. Flag for lead-safe contractor. Renovations require EPA RRP compliance." },
+  { abbr:"RRP",    full:"Renovation, Repair, and Painting Rule",                 es:"Regla de Renovación, Reparación y Pintura",       cat:"Health & Safety", note:"EPA rule requiring lead-safe work practices in pre-1978 homes. Contractors must be EPA-certified. Flag if insulation or weatherization work disturbs painted surfaces." },
+  { abbr:"EPA",    full:"Environmental Protection Agency",                       es:"Agencia de Protección Ambiental",                  cat:"Health & Safety", note:"Federal agency regulating environmental and health standards including asbestos, lead, and refrigerant handling. Sets RRP rule and refrigerant regulations relevant to HVAC work." },
+  { abbr:"CAA",    full:"Community Action Agency",                               es:"Agencia de Acción Comunitaria",                    cat:"ETO Programs", note:"Nonprofit organizations administering WAP and other low-income energy assistance programs. Key referral partners for CPF assessors when customer needs exceed ETO incentive scope." },
+  { abbr:"LIHEAP", full:"Low Income Home Energy Assistance Program",             es:"Programa de Asistencia Energética para Hogares",   cat:"ETO Programs", note:"Federal program providing heating and cooling bill assistance to income-qualified households. Administered through CAAs. Recommend alongside CPF upgrades for high energy-burden clients." },
+  { abbr:"DOE",    full:"Department of Energy",                                  es:"Departamento de Energía de EE.UU.",                cat:"ETO Programs", note:"Federal agency funding HOMES, WAP, and energy efficiency research. Developed the Home Energy Score (HES) tool used in HEA baseline modeling." },
+  { abbr:"IRS",    full:"Internal Revenue Service",                              es:"Servicio de Impuestos Internos",                   cat:"ETO Programs", note:"Federal tax agency administering the 25C Home Energy Tax Credit. Customers should consult a tax professional to claim 25C credits for qualifying upgrades." },
+  { abbr:"HES",    full:"Home Energy Score",                                     es:"Puntaje de Energía del Hogar",                     cat:"ETO Programs", note:"DOE 1–10 scoring system rating a home's energy efficiency based on structure and equipment. Used by Earth Advantage and ETO as an upgrade-modeling baseline. 10 = most efficient." },
+  { abbr:"MMBtu",  full:"Million British Thermal Units",                         es:"Millones de Unidades Térmicas Británicas",         cat:"Building Science", note:"Large energy unit used for annual whole-home energy reporting (EPS scores). 1 MMBtu = 1,000,000 BTU. Oregon average home: 50–80 MMBtu/year total energy use." },
+  { abbr:"Pascal", full:"Pascal (pressure unit)",                                es:"Pascal (unidad de presión)",                       cat:"Building Science", note:"Unit of air pressure used in blower door testing. Standard test pressure = 50 Pascals (Pa). Also used to measure combustion zone depressurization limits (typically -5 Pa max)." },
+  { abbr:"MFH",    full:"Multifamily Housing",                                   es:"Vivienda Multifamiliar",                           cat:"Field & Technical", note:"Buildings with 2+ units (duplexes, apartments, condos). CPF currently serves only detached single-family homes. Flag MFH and check for applicable OHCS or PCEF programs." },
+  { abbr:"AMR",    full:"Automated Meter Reading",                               es:"Lectura Automática de Medidor",                    cat:"Utilities", note:"Smart meter technology allowing remote utility data collection. Some utilities offer AMR data to support energy audits. Ask customer if utility provides monthly usage data." },
+  { abbr:"TOU",    full:"Time of Use (rate)",                                    es:"Tarifa por Tiempo de Uso",                         cat:"Utilities", note:"Utility pricing that varies by time of day. Higher rates during peak hours. Relevant for customers with heat pumps or EV chargers — time shifting can reduce bills." },
+  { abbr:"NEM",    full:"Net Energy Metering",                                   es:"Medición Neta de Energía",                         cat:"Utilities", note:"Utility billing arrangement crediting solar customers for excess energy sent to the grid. Note if customer has PV — affects energy use baseline and upgrade recommendations." },
+  { abbr:"EWEB",   full:"Eugene Water & Electric Board",                         es:"Junta de Agua y Electricidad de Eugene",           cat:"Utilities", note:"Municipal utility in Eugene, OR. NOT CPF-eligible — CPF requires investor-owned utility service (PGE, Pacific Power, NW Natural, Cascade Natural Gas, or Avista)." },
 ];
 
 // ─── ACRONYM STATE ────────────────────────────────────────────────────────────
 const acCats = ['All', ...new Set(acronyms.map(a => a.cat))];
 let acCat = 'All';
-let acTab = 'glossary';
 let acFcMode = 'abbr';
 let acFcDeck = [], acFcIdx = 0, acFcFlipped = false;
 
-// Acronym word search state
-let acwsGrid = [], acwsWords = [], acwsCells = [], acwsFound = new Set();
-let acwsSelecting = false, acwsStart = null, acwsCurrent = [];
-const ACWS_SIZE = 14;
-
-function setAcTab(tab) {
-  acTab = tab;
-  document.querySelectorAll('.ac-tab-btn').forEach((b, i) => {
-    b.classList.toggle('active', ['glossary','flashcards','wordsearch'][i] === tab);
-  });
-  document.getElementById('ac-gl-panel').classList.toggle('show', tab === 'glossary');
-  document.getElementById('ac-fc-panel').classList.toggle('show', tab === 'flashcards');
-  document.getElementById('acws-panel').classList.toggle('show', tab === 'wordsearch');
-  if (tab === 'flashcards' && !acFcDeck.length) buildAcDeck();
-  if (tab === 'wordsearch' && !acwsGrid.length) generateAcPuzzle();
+let acFcOpen = false;
+function toggleAcFlashcards() {
+  acFcOpen = !acFcOpen;
+  document.getElementById('ac-fc-panel').classList.toggle('show', acFcOpen);
+  document.getElementById('actab-flashcards').classList.toggle('active', acFcOpen);
+  if (acFcOpen && !acFcDeck.length) buildAcDeck();
 }
 
 // ── Acronym Reference ────────────────────────────────────────────────────────
@@ -549,183 +542,7 @@ function acFcNext(got) {
   showAcFcCard();
 }
 
-// ── Acronym Word Search ───────────────────────────────────────────────────────
-const ACWS_DIRS = [[0,1],[1,0],[0,-1],[-1,0]]; // horizontal & vertical only for short acronyms
 
-function populateAcwsCats() {
-  const sel = document.getElementById('acws-cat');
-  acCats.forEach(c => {
-    if (c !== 'All') { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); }
-  });
-}
-
-function getAcwsWords() {
-  const cat = document.getElementById('acws-cat').value;
-  let pool = cat === 'All' ? acronyms : acronyms.filter(a => a.cat === cat);
-  // Use the abbreviation as the search key — strip spaces, uppercase
-  const words = pool.map(a => ({
-    display: a.abbr,
-    full: a.full,
-    key: a.abbr.replace(/[\s\u00A0]/g,'').toUpperCase()
-  })).filter(w => w.key.length >= 2 && w.key.length <= 8 && /^[A-Z0-9]+$/.test(w.key));
-  // shuffle and take up to 8
-  return words.sort(() => Math.random() - 0.5).slice(0, 8);
-}
-
-function generateAcPuzzle() {
-  acwsFound = new Set();
-  acwsSelecting = false; acwsStart = null; acwsCurrent = [];
-  const candidates = getAcwsWords();
-  acwsGrid = Array.from({length: ACWS_SIZE}, () => Array(ACWS_SIZE).fill(''));
-  const placed = [];
-
-  for (const word of candidates) {
-    let success = false;
-    for (let attempt = 0; attempt < 300 && !success; attempt++) {
-      const [dr, dc] = ACWS_DIRS[Math.floor(Math.random() * ACWS_DIRS.length)];
-      const len = word.key.length;
-      // compute valid start range
-      const minR = dr < 0 ? len - 1 : 0;
-      const maxR = dr > 0 ? ACWS_SIZE - len : ACWS_SIZE - 1;
-      const minC = dc < 0 ? len - 1 : 0;
-      const maxC = dc > 0 ? ACWS_SIZE - len : ACWS_SIZE - 1;
-      if (minR > maxR || minC > maxC) continue;
-      const r = minR + Math.floor(Math.random() * (maxR - minR + 1));
-      const c = minC + Math.floor(Math.random() * (maxC - minC + 1));
-      let conflict = false;
-      for (let i = 0; i < len; i++) {
-        const gr = r + dr * i, gc = c + dc * i;
-        if (acwsGrid[gr][gc] && acwsGrid[gr][gc] !== word.key[i]) { conflict = true; break; }
-      }
-      if (conflict) continue;
-      for (let i = 0; i < len; i++) acwsGrid[r + dr * i][c + dc * i] = word.key[i];
-      placed.push({ ...word, r, c, dr, dc });
-      success = true;
-    }
-  }
-  acwsWords = placed;
-
-  // fill blanks with random letters
-  const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  for (let r = 0; r < ACWS_SIZE; r++)
-    for (let c = 0; c < ACWS_SIZE; c++)
-      if (!acwsGrid[r][c]) acwsGrid[r][c] = alpha[Math.floor(Math.random() * alpha.length)];
-
-  renderAcwsGrid();
-  renderAcwsList();
-  document.getElementById('acws-congrats').classList.remove('show');
-}
-
-function renderAcwsGrid() {
-  const el = document.getElementById('acws-grid');
-  el.style.gridTemplateColumns = `repeat(${ACWS_SIZE}, auto)`;
-  el.innerHTML = '';
-  acwsCells = [];
-  for (let r = 0; r < ACWS_SIZE; r++) {
-    acwsCells[r] = [];
-    for (let c = 0; c < ACWS_SIZE; c++) {
-      const cell = document.createElement('div');
-      cell.className = 'acws-cell';
-      cell.textContent = acwsGrid[r][c];
-      cell.dataset.r = r; cell.dataset.c = c;
-      cell.addEventListener('mousedown', acwsMouseDown);
-      cell.addEventListener('mouseenter', acwsMouseEnter);
-      cell.addEventListener('mouseup', acwsMouseUp);
-      cell.addEventListener('touchstart', acwsTouchStart, {passive:true});
-      cell.addEventListener('touchmove', acwsTouchMove, {passive:true});
-      cell.addEventListener('touchend', acwsTouchEnd, {passive:true});
-      el.appendChild(cell);
-      acwsCells[r][c] = cell;
-    }
-  }
-}
-
-function renderAcwsList() {
-  document.getElementById('acws-word-list').innerHTML = acwsWords.map((w, i) =>
-    `<li class="acws-word-item ${acwsFound.has(i) ? 'found' : ''}" id="acwsl-${i}">
-      <span class="acws-abbr-label">${w.display}</span>
-      <span class="acws-full-label">${w.full}</span>
-    </li>`).join('');
-}
-
-function acwsGetCell(e) {
-  const r = parseInt(e.target.dataset.r), c = parseInt(e.target.dataset.c);
-  return isNaN(r) ? null : {r, c};
-}
-function acwsGetCellFromTouch(touch) {
-  const el = document.elementFromPoint(touch.clientX, touch.clientY);
-  if (!el || !el.dataset.r) return null;
-  return {r: parseInt(el.dataset.r), c: parseInt(el.dataset.c)};
-}
-function acwsMouseDown(e) { const p = acwsGetCell(e); if (p) acwsBegin(p); }
-function acwsMouseEnter(e) { const p = acwsGetCell(e); if (p && acwsSelecting) acwsMove(p); }
-function acwsMouseUp() { acwsEnd(); }
-function acwsTouchStart(e) { const p = acwsGetCellFromTouch(e.touches[0]); if (p) acwsBegin(p); }
-function acwsTouchMove(e) { const p = acwsGetCellFromTouch(e.touches[0]); if (p && acwsSelecting) acwsMove(p); }
-function acwsTouchEnd() { acwsEnd(); }
-document.addEventListener('mouseup', () => { if (acwsSelecting) acwsEnd(); });
-
-function acwsBegin(p) { acwsSelecting = true; acwsStart = p; acwsCurrent = [p]; acwsHighlight(); }
-function acwsMove(p) {
-  if (!acwsStart) return;
-  const dr = Math.sign(p.r - acwsStart.r), dc = Math.sign(p.c - acwsStart.c);
-  if (dr === 0 && dc === 0) { acwsCurrent = [acwsStart]; acwsHighlight(); return; }
-  // only allow axis-aligned selection (no diagonals)
-  if (dr !== 0 && dc !== 0) return;
-  const cells = [];
-  let cr = acwsStart.r, cc = acwsStart.c;
-  for (let step = 0; step < ACWS_SIZE; step++) {
-    cells.push({r: cr, c: cc});
-    if (cr === p.r && cc === p.c) break;
-    cr += dr; cc += dc;
-    if (cr < 0 || cr >= ACWS_SIZE || cc < 0 || cc >= ACWS_SIZE) break;
-  }
-  acwsCurrent = cells;
-  acwsHighlight();
-}
-function acwsEnd() {
-  if (!acwsSelecting) return;
-  acwsSelecting = false;
-  acwsCheck();
-  acwsCurrent = [];
-  acwsHighlight();
-}
-function acwsHighlight() {
-  for (let r = 0; r < ACWS_SIZE; r++)
-    for (let c = 0; c < ACWS_SIZE; c++) {
-      const isSel = acwsCurrent.some(p => p.r === r && p.c === c);
-      acwsCells[r][c].classList.toggle('selecting', isSel && !acwsIsFoundCell(r, c));
-    }
-}
-function acwsIsFoundCell(r, c) {
-  for (const idx of acwsFound) {
-    const w = acwsWords[idx];
-    for (let i = 0; i < w.key.length; i++)
-      if (w.r + w.dr * i === r && w.c + w.dc * i === c) return true;
-  }
-  return false;
-}
-function acwsCheck() {
-  if (!acwsCurrent.length) return;
-  const selected = acwsCurrent.map(p => acwsGrid[p.r][p.c]).join('');
-  acwsWords.forEach((w, i) => {
-    if (acwsFound.has(i)) return;
-    const rev = w.key.split('').reverse().join('');
-    if (selected === w.key || selected === rev) {
-      acwsFound.add(i);
-      document.getElementById('acwsl-' + i).classList.add('found');
-      acwsMarkFound(w);
-      if (acwsFound.size === acwsWords.length)
-        setTimeout(() => document.getElementById('acws-congrats').classList.add('show'), 300);
-    }
-  });
-}
-function acwsMarkFound(w) {
-  for (let i = 0; i < w.key.length; i++) {
-    acwsCells[w.r + w.dr * i][w.c + w.dc * i].classList.add('found');
-    acwsCells[w.r + w.dr * i][w.c + w.dc * i].classList.remove('selecting');
-  }
-}
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const vocab = [
@@ -932,6 +749,32 @@ const vocab = [
   { en:"Moisture", es:"Humedad", pron:"oo-meh-DAHD", cat:"Foundation", note:"Key concern in crawl spaces and basements. ¿Hay humedad en el piso? (Is there moisture on the floor?)" },
   { en:"Duct insulation", es:"Aislamiento de ductos", pron:"ahy-slah-mee-EN-toh deh DOOK-tohs", cat:"Foundation", note:"Insulation wrap on ducts running through unconditioned spaces. Note if absent or damaged." },
   { en:"Disconnected duct", es:"Ducto desconectado", pron:"DOOK-toh des-ko-nek-TAH-doh", cat:"Foundation", note:"Separated duct sections in crawl space or attic — major energy loss. Flag for contractor repair." },
+
+  // Additional vocabulary
+  { en:"Condensation", es:"Condensación", pron:"kon-den-sah-see-OHN", cat:"Building", note:"Water droplets forming when warm humid air meets cold surfaces. Common on windows and pipes. Indicates moisture problem." },
+  { en:"Weatherstripping", es:"Burlete de puerta", pron:"boor-LEH-teh deh PWEHR-tah", cat:"Building", note:"Foam or rubber seal around door frames. Prevents drafts and air leakage. Check for wear or gaps." },
+  { en:"Knee wall", es:"Muro bajo", pron:"MOO-roh BAH-hoh", cat:"Building", note:"Short wall in attic space. Common in cape-style homes. Requires insulation and air sealing behind it." },
+  { en:"Rim joist", es:"Viga perimetral", pron:"VEE-gah peh-ree-meh-TRAHL", cat:"Building", note:"Framing at the edge of the floor system where it meets the foundation. Common air sealing target." },
+  { en:"Sill plate", es:"Solera", pron:"soh-LEH-rah", cat:"Building", note:"Bottom horizontal framing member resting on the foundation. Often a source of air leakage." },
+  { en:"Duct tape", es:"Cinta de ductos", pron:"SEEN-tah deh DOOK-tohs", cat:"Construction", note:"Not recommended for sealing ducts — use mastic or metal-backed tape for proper duct sealing." },
+  { en:"Mastic sealant", es:"Sellante de masilla", pron:"seh-YAHN-teh deh mah-SEE-yah", cat:"Construction", note:"Paste-like compound used to seal duct joints. Durable and flexible — preferred over tape for duct sealing." },
+  { en:"Plenum", es:"Pleno de aire", pron:"PLEH-noh deh EYE-reh", cat:"HVAC", note:"Air distribution chamber connected to the furnace. Pressure test and inspect for leaks." },
+  { en:"Return air", es:"Aire de retorno", pron:"EYE-reh deh reh-TOR-noh", cat:"HVAC", note:"Air pulled back to the furnace for reconditioning. Blocked returns reduce efficiency." },
+  { en:"Supply duct", es:"Ducto de suministro", pron:"DOOK-toh deh soo-mee-NEES-troh", cat:"HVAC", note:"Delivers conditioned air from the furnace to rooms. Check for leaks, disconnections, and insulation." },
+  { en:"Blower door", es:"Prueba de infiltración", pron:"PRWEH-bah deh een-feel-trah-see-OHN", cat:"Equipment", note:"Diagnostic test measuring home airtightness. Results in ACH50 or CFM50." },
+  { en:"Infrared camera", es:"Cámara infrarroja", pron:"KAH-mah-rah een-frah-ROH-hah", cat:"Equipment", note:"Thermal imaging tool that reveals heat loss, air leaks, and moisture. Used in advanced audits." },
+  { en:"Combustion analyzer", es:"Analizador de combustión", pron:"ah-nah-lee-sah-DOR deh kom-boos-tee-OHN", cat:"Equipment", note:"Measures efficiency and safety of combustion appliances. Detects dangerous CO levels in flue gases." },
+  { en:"Manometer", es:"Manómetro", pron:"mah-NOH-meh-troh", cat:"Equipment", note:"Measures air pressure difference. Used with blower door for building tightness testing." },
+  { en:"Tax credit", es:"Crédito fiscal", pron:"KREH-dee-toh fees-KAHL", cat:"Program", note:"Federal 25C tax credit up to $3,200/year for qualifying upgrades. Stackable with ETO incentives." },
+  { en:"Rebate check", es:"Cheque de reembolso", pron:"CHEH-keh deh reh-em-BOHL-soh", cat:"Program", note:"Payment issued to customer or partner after project completion and ETO approval." },
+  { en:"Pre-approval", es:"Preaprobación", pron:"preh-ah-proh-bah-see-OHN", cat:"Program", note:"Required before starting heat pump or HPWH installs under CPF. Submit Form 300 HPQ first." },
+  { en:"Submission deadline", es:"Fecha límite de envío", pron:"FEH-chah LEE-mee-teh deh en-VEE-oh", cat:"Program", note:"Projects must be submitted within 90 days of assessment. Track deadlines carefully." },
+  { en:"Radon", es:"Radón", pron:"rah-DON", cat:"Health & Safety", note:"Radioactive gas from soil — odorless and colorless. Second leading cause of lung cancer. Recommend testing in basements." },
+  { en:"Lead paint", es:"Pintura con plomo", pron:"peen-TOO-rah kon PLOH-moh", cat:"Health & Safety", note:"Common in homes built before 1978. Do not sand or disturb. Flag for lead-safe contractor." },
+  { en:"Pest damage", es:"Daño por plagas", pron:"DAH-nyoh por PLAH-gahs", cat:"Health & Safety", note:"Termite or rodent damage to framing or insulation. Flag and do not proceed with insulation work." },
+  { en:"Weatherization audit", es:"Auditoría de eficiencia", pron:"ow-dee-toh-REE-ah deh eh-fee-see-EN-see-ah", cat:"Program", note:"Comprehensive inspection documenting all energy upgrade opportunities and priorities." },
+  { en:"Energy burden", es:"Carga energética", pron:"KAR-gah eh-nehr-HEH-tee-kah", cat:"Program", note:"Percentage of household income spent on energy bills. LMI households often face high energy burden. CPF targets reduction." },
+  { en:"Utility bill analysis", es:"Análisis de factura de servicios", pron:"ah-NAH-lee-sees deh fahk-TOO-rah", cat:"Program", note:"Review 12 months of bills to identify usage patterns and seasonal spikes." },
 ];
 
 const phrases = [
@@ -1095,13 +938,49 @@ function setLang(l) {
   lang = l;
   document.getElementById('lb-en').classList.toggle('active', l === 'en');
   document.getElementById('lb-es').classList.toggle('active', l === 'es');
-  renderGlossary();
-  renderPhraseBuilder();
-  // update page text
+
+  // Nav tabs
+  const navTabs = document.querySelectorAll('.nav-tab');
+  const navLabels = l === 'en'
+    ? ['Glossary', 'Flashcards', 'Acronyms']
+    : ['Glosario', 'Tarjetas', 'Acrónimos'];
+  navTabs.forEach((t, i) => { if (navLabels[i]) t.textContent = navLabels[i]; });
+
+  // Glossary page
   document.getElementById('gl-title').textContent = l === 'en' ? 'Field Vocabulary' : 'Vocabulario de Campo';
   document.getElementById('gl-sub').textContent = l === 'en'
     ? 'Search and browse English–Spanish terms used in home energy assessments.'
     : 'Busca y explora términos en inglés–español usados en evaluaciones de energía del hogar.';
+  document.getElementById('gl-search').placeholder = l === 'en' ? 'Search terms...' : 'Buscar términos...';
+
+  // Flashcards page
+  document.querySelector('#page-flashcards .page-title').textContent = l === 'en' ? 'Flashcards' : 'Tarjetas de Estudio';
+  document.querySelector('#page-flashcards .page-sub').textContent = l === 'en'
+    ? 'Tap the card to reveal the answer. Mark it to track progress.'
+    : 'Toca la tarjeta para revelar la respuesta. Márcala para seguir tu progreso.';
+  document.getElementById('fcm-en').textContent = l === 'en' ? 'EN → ES' : 'IN → ES';
+  document.getElementById('fcm-es').textContent = l === 'en' ? 'ES → EN' : 'ES → IN';
+  document.querySelector('#fc-btns .fc-btn-skip').textContent = l === 'en' ? 'Try again' : 'Intentar de nuevo';
+  document.querySelector('#fc-btns .fc-btn-got').textContent = l === 'en' ? 'Got it ✓' : 'Lo sé ✓';
+  document.getElementById('fc-hint').textContent = l === 'en' ? 'tap to reveal' : 'toca para revelar';
+
+  // Acronyms page
+  document.querySelector('#page-acronyms .page-title').textContent = l === 'en' ? 'Acronyms' : 'Acrónimos';
+  document.querySelector('#page-acronyms .page-sub').textContent = l === 'en'
+    ? 'Program, field, office, and building science abbreviations for CPF and home energy assessment work.'
+    : 'Abreviaturas de programa, campo, oficina y ciencia de edificios para el trabajo de evaluación de energía del hogar CPF.';
+  document.getElementById('actab-flashcards').textContent = l === 'en' ? '🃏 Flashcards' : '🃏 Tarjetas';
+  document.getElementById('ac-search').placeholder = l === 'en' ? 'Search acronyms...' : 'Buscar acrónimos...';
+  document.getElementById('acfc-btns').querySelector('.fc-btn-skip').textContent = l === 'en' ? 'Try again' : 'Intentar de nuevo';
+  document.getElementById('acfc-btns').querySelector('.fc-btn-got').textContent = l === 'en' ? 'Got it ✓' : 'Lo sé ✓';
+  document.getElementById('acfc-hint').textContent = l === 'en' ? 'tap to reveal' : 'toca para revelar';
+  document.getElementById('acfcm-abbr').textContent = l === 'en' ? 'Abbr → Full' : 'Abrev → Comp';
+  document.getElementById('acfcm-full').textContent = l === 'en' ? 'Full → Abbr' : 'Comp → Abrev';
+
+  renderGlossary();
+  renderPhraseBuilder();
+  renderAcronyms();
+  buildDeck();
 }
 
 // ─── GLOSSARY ────────────────────────────────────────────────────────────────
@@ -1205,6 +1084,7 @@ function fcNext(got) {
 // ─── PHRASE BUILDER ───────────────────────────────────────────────────────────
 function renderPhraseBuilder() {
   const scens = document.getElementById('pb-scenarios');
+  if (!scens) return;
   scens.innerHTML = phrases.map((p, i) =>
     `<button class="pb-scen-btn ${i === pbScenario ? 'active' : ''}" onclick="setPbScenario(${i})">${p.scenario}</button>`
   ).join('');
@@ -1213,9 +1093,11 @@ function renderPhraseBuilder() {
 }
 function setPbScenario(i) { pbScenario = i; pbWords = []; renderPhraseBuilder(); }
 function renderPbBank() {
+  const el = document.getElementById('pb-bank');
+  if (!el) return;
   const p = phrases[pbScenario];
   const words = lang === 'en' ? p.en : p.es;
-  document.getElementById('pb-bank').innerHTML = words.map((w, i) =>
+  el.innerHTML = words.map((w, i) =>
     `<div class="pb-bank-chip ${pbWords.includes(i) ? 'used' : ''}" onclick="pbAddWord(${i})">${w}</div>`
   ).join('');
   document.getElementById('pb-bank-title').textContent = lang === 'en' ? 'WORD BANK — English' : 'BANCO DE PALABRAS — Español';
@@ -1228,10 +1110,10 @@ function pbAddWord(i) {
   renderPbBank();
 }
 function renderPbPhrase() {
+  const box = document.getElementById('pb-phrase-box');
+  if (!box) return;
   const p = phrases[pbScenario];
   const words = lang === 'en' ? p.en : p.es;
-  const box = document.getElementById('pb-phrase-box');
-  const placeholder = document.getElementById('pb-placeholder');
   if (!pbWords.length) {
     box.classList.remove('has-words');
     box.innerHTML = '<span class="pb-placeholder">Tap words below to build your phrase...</span>';
@@ -1445,7 +1327,7 @@ renderPhraseBuilder();
 renderAcCatFilters();
 renderAcronyms();
 populateAcFcCats();
-populateAcwsCats();
+buildAcDeck();
 </script>
 </body>
 </html>
